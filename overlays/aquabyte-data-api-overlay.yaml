@@ -1,0 +1,102 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Aquabyte Public API
+  version: 1.0.0
+extends: openapi/aquabyte-data-api-openapi.yml
+x-apievangelist:
+  generated: '2026-08-06'
+  method: generated
+  source: openapi/aquabyte-data-api-openapi.yml
+  note: >-
+    Non-destructive enhancements over the specification Aquabyte serves at
+    api.aquabyte.ai/openapi.json. The largest single gap this overlay closes is the missing
+    securitySchemes object — the API is API-key authenticated and enforces it (401 on an
+    unauthenticated call), but the specification never says so in machine-readable form.
+    Applying this overlay makes the auth contract, the rate limit and the deprecation
+    replacements readable by a generator or an agent. The original document is never
+    mutated.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-profile: https://apis.io/provider/aquabyte
+    x-apievangelist-rate-limit:
+      requests: 1000
+      period: hour
+      scope: api-key
+      source: info.description
+    x-apievangelist-result-cap:
+      records: 10000
+      pagination: cursor
+      cursor_param: nextToken
+    x-apievangelist-contact: info@apievangelist.com
+
+- target: $.components
+  update:
+    securitySchemes:
+      apikey:
+        type: apiKey
+        in: header
+        name: apikey
+        description: >-
+          Per-customer API key issued by Aquabyte, sent on every request as the `apikey`
+          header. Documented in info.description of the published specification; added here
+          because the source document declares no securitySchemes.
+
+- target: $
+  update:
+    security:
+    - apikey: []
+
+- target: $.paths['/pens/{penId}/environmental'].get
+  update:
+    x-replaced-by: get_environmental_environmental_get
+    x-sunset-note: Use GET /environmental?penId={penId}
+
+- target: $.paths['/pens/{penId}/environmental/latest'].get
+  update:
+    x-replaced-by: get_environmental_latest_all_pens_environmental_latest_get
+    x-sunset-note: Use GET /environmental/latest?penId={penId}
+
+- target: $.paths['/pens/{penId}/biomass'].get
+  update:
+    x-replaced-by: get_biomass_daily_biomass_get
+    x-sunset-note: Use GET /biomass?penId={penId}
+
+- target: $.paths['/pens/{penId}/biomass/harvestReport'].get
+  update:
+    x-replaced-by: get_biomass_harvest_report_biomass_harvestReport_get
+    x-sunset-note: Use GET /biomass/harvestReport?penId={penId}
+
+- target: $.paths['/pens/{penId}/liceCount'].get
+  update:
+    x-replaced-by: get_pen_lice_count_liceCount_get
+    x-sunset-note: Use GET /liceCount?penId={penId}
+
+- target: $.paths['/pens/{penId}/behavior/swimSpeed'].get
+  update:
+    x-replaced-by: get_behavior_swim_speed_behaviour_swimSpeed_get
+    x-sunset-note: Use GET /behaviour/swimSpeed?penId={penId}
+
+- target: $.paths['/pens/{penId}/behavior/breathingIndex'].get
+  update:
+    x-replaced-by: get_behavior_breathing_index_behaviour_breathingIndex_get
+    x-sunset-note: Use GET /behaviour/breathingIndex?penId={penId}
+
+- target: $.paths['/pens/{penId}/welfareScores'].get
+  update:
+    x-replaced-by: get_pen_welfare_data_welfareScores_get
+    x-sunset-note: Use GET /welfareScores?penId={penId}
+
+- target: $.paths['/superiorRate'].post
+  update:
+    x-stability: experimental
+    x-note: >-
+      Declared a preview API in its own summary; shape is subject to change. Uses POST but
+      takes all inputs as query parameters and performs a read.
+
+- target: $.tags
+  update:
+  - name: sites
+    description: Site and pen inventory — the entities every other resource is keyed by.
+  - name: environmental
+    description: Temperature, camera depth, dissolved oxygen, salinity and fish density.

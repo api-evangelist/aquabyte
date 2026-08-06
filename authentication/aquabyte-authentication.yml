@@ -1,0 +1,54 @@
+generated: '2026-08-06'
+method: searched
+source: https://api.aquabyte.ai/openapi.json
+docs: https://api.aquabyte.ai/v3/docs
+note: >-
+  The OpenAPI 3.1 document Aquabyte serves at api.aquabyte.ai/openapi.json declares NO
+  components.securitySchemes and no top-level security requirement — the auth contract is
+  documented in prose inside info.description instead. This profile is therefore SEARCHED
+  from that published description (and confirmed by probing a protected operation), not
+  derived from securitySchemes. The gap is worth reporting to the provider: adding an
+  apiKey securityScheme and applying it would make the contract machine-readable.
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  oauth2_flows: []
+  spec_declares_security_schemes: false
+schemes:
+- name: apikey
+  type: apiKey
+  in: header
+  parameter_name: apikey
+  description: >-
+    Per-customer API key issued by Aquabyte. Sent on every HTTPS request as the `apikey`
+    request header. Quoted verbatim from the published API description: "To use our API you
+    must be issued an API key. Instructions: For all HTTPS requests you will need to pass in
+    your API key as part of the header: `apikey: {API_KEY}`".
+  issuance: manual — keys are issued by Aquabyte to existing customers; there is no public
+    self-service signup for API credentials.
+  sources:
+  - https://api.aquabyte.ai/openapi.json (info.description)
+  applies_to: all operations
+x-evidence:
+- fetched: '2026-08-06'
+  url: https://api.aquabyte.ai/openapi.json
+  http_status: 200
+  content_type: application/json
+  note: OpenAPI 3.1.0, 19 operations, no securitySchemes object
+- fetched: '2026-08-06'
+  url: https://api.aquabyte.ai/v3/sites
+  http_status: 401
+  note: unauthenticated request to a documented operation is rejected, confirming the key
+    requirement is enforced
+- fetched: '2026-08-06'
+  url: https://api.aquabyte.ai/v3/docs
+  http_status: 200
+  content_type: text/html
+  note: public ReDoc rendering of the same specification
+gaps:
+- No `components.securitySchemes` in the OpenAPI, so no machine-readable auth contract.
+- No OAuth 2.0 or OpenID Connect surface; no scopes, so `scopes/` is not applicable.
+- No `/.well-known/openid-configuration` or `/.well-known/oauth-authorization-server`
+  (both probed, both 404 on api.aquabyte.ai).

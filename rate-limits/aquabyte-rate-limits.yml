@@ -1,0 +1,36 @@
+generated: '2026-08-06'
+method: searched
+source: https://api.aquabyte.ai/openapi.json
+docs: https://api.aquabyte.ai/v3/docs
+summary: >-
+  A single global quota is published in prose inside the OpenAPI description. It is not
+  expressed in the specification as a 429 response or as RateLimit response headers, so it
+  is documented but not machine-readable at runtime.
+rate_limits:
+- name: Global request quota
+  scope: api-key
+  limit_count: 1000
+  limit_period: hour
+  applies_to: all operations
+  quote: Requests are limited to 1000 requests/hour
+  source: https://api.aquabyte.ai/openapi.json (info.description)
+result_limits:
+- name: Result set cap
+  limit_count: 10000
+  unit: records
+  scope: response
+  overflow_behaviour: cursor
+  detail: >-
+    Responses are capped at 10,000 records; over that, the response carries a nextToken and
+    the client repeats the request with &nextToken=<token> until nextToken is absent.
+  source: https://api.aquabyte.ai/openapi.json (info.description)
+headers:
+  documented: []
+  note: >-
+    No X-RateLimit-*, RateLimit or Retry-After response headers are documented, and no 429
+    response is declared on any operation. An agent can plan against the stated hourly
+    ceiling but cannot read remaining quota mid-run.
+plans: null
+plans_note: >-
+  Aquabyte publishes no pricing or plan tiers for the API; access is bundled with a
+  commercial customer relationship and keys are issued manually.

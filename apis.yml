@@ -1,18 +1,89 @@
 aid: aquabyte
 name: Aquabyte
-description: 'Aquabyte is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Aquabyte AS is a Norwegian-American aquaculture technology company, founded
+  in 2017 with offices in Bergen (Laksevåg), Norway, San Francisco and Chile, that applies
+  computer vision and machine learning to salmon and trout farming. Underwater cameras
+  (Hydra 360, Hammerhead, Atlas) stream imagery into a cloud platform that produces
+  biomass and weight estimation, sea-lice counting, welfare scoring, swim-speed and
+  breathing-index behaviour metrics, environmental readings and feeding decision support,
+  from smolt through harvest. Customers reach that data either through the Aquabyte
+  customer portal at app.aquabyte.ai or through the Aquabyte Public API — a documented,
+  API-key-authenticated REST service at api.aquabyte.ai/v3 whose OpenAPI 3.1 definition
+  is served publicly at api.aquabyte.ai/openapi.json and rendered with ReDoc at /v3/docs.'
 url: https://raw.githubusercontent.com/api-evangelist/aquabyte/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: openapi-harvested
 specificationVersion: '0.20'
 created: '2026-08-06'
 modified: '2026-08-06'
+image: https://www.aquabyte.ai/en/icon-illyi6.png
 tags:
-- Company
-apis: []
+- Aquaculture
+- Fish Farming
+- Computer Vision
+- Machine Learning
+- Biomass Estimation
+- Sea Lice
+- Fish Welfare
+- Environmental Monitoring
+- Agriculture Technology
+- Norway
+- Salmon
+- Data
+apis:
+- name: Aquabyte Public API
+  description: 'Read-only REST API over Aquabyte''s aquaculture monitoring data. Version
+    v3.1 exposes site and pen inventory plus historical and latest time-series for
+    biomass (including harvest reports), sea-lice counts, welfare scores, behaviour
+    (swim speed, swim tilt, breathing index) and environmental readings. v3.1 moved
+    penId from a path segment to a query parameter and added penId=all bulk fetching
+    with nextToken cursor pagination capped at 10,000 records per page; the equivalent
+    /pens/{penId}/... operations from v3.0 remain but are marked deprecated in the
+    specification. Authentication is a per-customer API key sent in an apikey request
+    header, and requests are limited to 1,000 per hour.'
+  humanURL: https://api.aquabyte.ai/v3/docs
+  baseURL: https://api.aquabyte.ai/v3
+  tags:
+  - aquaculture
+  - fish-farming
+  - biomass
+  - sea-lice
+  - fish-welfare
+  - fish-behaviour
+  - environmental-monitoring
+  - time-series
+  - rest
+  properties:
+  - type: OpenAPI
+    url: openapi/aquabyte-data-api-openapi.yml
+  - type: Documentation
+    url: https://api.aquabyte.ai/v3/docs
+  - type: APIReference
+    url: https://api.aquabyte.ai/v3/docs
+  - type: Authentication
+    url: authentication/aquabyte-authentication.yml
+  - type: Conventions
+    url: conventions/aquabyte-conventions.yml
+  - type: ErrorCatalog
+    url: errors/aquabyte-problem-types.yml
+  - type: DataModel
+    url: data-model/aquabyte-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/aquabyte-lifecycle.yml
+  - type: Deprecation
+    url: lifecycle/aquabyte-lifecycle.yml
+  - type: RateLimits
+    url: rate-limits/aquabyte-rate-limits.yml
+  - type: Conformance
+    url: conformance/aquabyte-conformance.yml
+  - type: Overlay
+    url: overlays/aquabyte-data-api-overlay.yaml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: AgenticAccess
+    url: agentic-access/aquabyte-agentic-access.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +91,33 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://forgeglobal.com/aquabyte_stock/
+  url: https://www.aquabyte.ai/
+- type: Documentation
+  url: https://api.aquabyte.ai/v3/docs
+- type: APIReference
+  url: https://api.aquabyte.ai/v3/docs
+- type: Login
+  url: https://app.aquabyte.ai/login
+- type: Support
+  url: https://www.aquabyte.ai/contact
+- type: TermsOfService
+  url: https://www.aquabyte.ai/terms
+- type: PrivacyPolicy
+  url: https://www.aquabyte.ai/privacy-policy
+- type: GitHubOrganization
+  url: https://github.com/aquabyte-new
+- type: LinkedIn
+  url: https://www.linkedin.com/company/aquabyte
+- type: Authentication
+  url: authentication/aquabyte-authentication.yml
+- type: Conventions
+  url: conventions/aquabyte-conventions.yml
+- type: LLMsTxt
+  url: llms/aquabyte-llms.txt
+- type: DomainSecurity
+  url: security/aquabyte-domain-security.yml
+x-enrichment:
+  date: '2026-08-06'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v1

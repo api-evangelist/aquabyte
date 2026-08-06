@@ -1,0 +1,104 @@
+generated: '2026-08-06'
+method: derived
+source: openapi/aquabyte-data-api-openapi.yml
+format: fastapi-validation-error
+rfc9457: false
+note: >-
+  Aquabyte does not publish an error reference page, and the OpenAPI documents exactly one
+  error response class — 422 Validation Error — on 17 of its 19 operations. The envelope is
+  the FastAPI default (HTTPValidationError -> ValidationError[]), which IS a single shared
+  schema $ref'd across every error response, so the shape is stable and machine-readable
+  even though it is not RFC 9457 application/problem+json. The 401 below is OBSERVED from a
+  live unauthenticated probe, not documented in the specification.
+
+envelope:
+  media_type: application/json
+  schema: '#/components/schemas/HTTPValidationError'
+  shape: |
+    {
+      "detail": [
+        {"loc": ["query", "penId"], "msg": "...", "type": "..."}
+      ]
+    }
+  fields:
+  - name: detail
+    type: array
+    items: '#/components/schemas/ValidationError'
+  - name: detail[].loc
+    type: array
+    description: Location of the offending input — e.g. ["query", "fromDate"]
+  - name: detail[].msg
+    type: string
+    description: Human-readable message
+  - name: detail[].type
+    type: string
+    description: Stable machine-readable error type token (FastAPI/Pydantic v2 vocabulary,
+      e.g. missing, string_type, datetime_parsing)
+  - name: detail[].input
+    description: The rejected input value
+  - name: detail[].ctx
+    type: object
+    description: Additional context for the error type
+
+problems:
+- status: 422
+  title: Validation Error
+  schema: '#/components/schemas/HTTPValidationError'
+  media_type: application/json
+  documented: true
+  description: >-
+    Returned when a path or query parameter fails validation — a missing required penId, an
+    unparseable fromDate/toDate/fromTime/toTime, a period value outside the enum, or a
+    non-integer bucketSize.
+  source_operations:
+  - openapi/aquabyte-data-api-openapi.yml#get_sites_siteId_sites__siteId__get
+  - openapi/aquabyte-data-api-openapi.yml#get_environmental_environmental_get
+  - openapi/aquabyte-data-api-openapi.yml#get_environmental_latest_all_pens_environmental_latest_get
+  - openapi/aquabyte-data-api-openapi.yml#get_biomass_daily_biomass_get
+  - openapi/aquabyte-data-api-openapi.yml#get_biomass_harvest_report_biomass_harvestReport_get
+  - openapi/aquabyte-data-api-openapi.yml#get_pen_lice_count_liceCount_get
+  - openapi/aquabyte-data-api-openapi.yml#get_behavior_swim_speed_behaviour_swimSpeed_get
+  - openapi/aquabyte-data-api-openapi.yml#get_behavior_breathing_index_behaviour_breathingIndex_get
+  - openapi/aquabyte-data-api-openapi.yml#get_pen_welfare_data_welfareScores_get
+  - openapi/aquabyte-data-api-openapi.yml#get_pen_superior_rate_superiorRate_post
+  remediation: Correct the named parameter in detail[].loc and retry. Not retryable as-is.
+- status: 401
+  title: Unauthorized
+  documented: false
+  method: probed
+  media_type: none (empty body observed)
+  description: >-
+    Returned when the `apikey` header is missing or invalid. Not present in the published
+    specification; recorded here from a live probe.
+  evidence:
+    url: https://api.aquabyte.ai/v3/sites
+    http_status: 401
+    content_length: 0
+    fetched: '2026-08-06'
+  remediation: Supply a valid issued API key in the `apikey` request header.
+- status: 404
+  title: Not Found
+  documented: false
+  method: probed
+  media_type: application/json
+  description: >-
+    Unrouted paths on api.aquabyte.ai return {"url":"<path> not found, 404"} — a bare
+    message object, not the HTTPValidationError envelope. Recorded from a live probe.
+  evidence:
+    url: https://api.aquabyte.ai/docs/openapi.json
+    http_status: 404
+    fetched: '2026-08-06'
+
+undocumented:
+- status: 429
+  note: >-
+    The description publishes a 1,000 requests/hour limit but no 429 response is declared in
+    the specification and no rate-limit headers are documented. An agent cannot tell a
+    throttle from any other failure from the contract alone.
+- status: 5xx
+  note: No server-error responses are declared on any operation.
+
+gaps:
+- No error reference page anywhere on aquabyte.ai or api.aquabyte.ai.
+- No RFC 9457 application/problem+json.
+- 401, 404, 429 and 5xx are all absent from the specification.

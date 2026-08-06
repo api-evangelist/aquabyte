@@ -1,0 +1,60 @@
+generated: '2026-08-06'
+method: probed
+source: live HTTP probes, 2026-08-06
+result: none
+summary: >-
+  Aquabyte serves no /.well-known/ discovery documents. Every canonical path was probed on
+  all three hosts and none returned a valid document, so no raw files are stored and no
+  WellKnown / SecurityTxt / APICatalog pointer is wired in apis.yml — there is nothing to
+  point at.
+
+hosts:
+- host: https://api.aquabyte.ai
+  behaviour: honest 404 — returns {"url":"<path> not found, 404"} as application/json
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 404}
+- host: https://www.aquabyte.ai
+  behaviour: >-
+    Next.js site returns HTTP 500 (an "Internal Server Error" HTML page) for every
+    /.well-known/* path rather than a 404. A 500 is not a document; nothing is recorded as
+    present.
+  documents:
+  - {path: /.well-known/security.txt, status: 500, content_type: text/html}
+  - {path: /security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 500, content_type: text/html}
+  - {path: /.well-known/oauth-authorization-server, status: 500, content_type: text/html}
+  - {path: /.well-known/api-catalog, status: 500, content_type: text/html}
+  - {path: /.well-known/ai-plugin.json, status: 500, content_type: text/html}
+  - {path: /.well-known/agent-card.json, status: 500, content_type: text/html}
+  - {path: /.well-known/agent.json, status: 500, content_type: text/html}
+  - {path: /llms.txt, status: 404}
+  - {path: /robots.txt, status: 404}
+  - {path: /sitemap.xml, status: 404}
+- host: https://app.aquabyte.ai
+  behaviour: >-
+    SPA catch-all. Returns HTTP 200 with an identical 6,337-byte text/html shell for EVERY
+    path probed, including /.well-known/agent-card.json, /openapi.json and /robots.txt.
+    These 200s are rejected as false positives — none of them is a document.
+  documents:
+  - {path: /.well-known/security.txt, status: 200, content_type: text/html, valid: false}
+  - {path: /.well-known/agent-card.json, status: 200, content_type: text/html, valid: false}
+  - {path: /.well-known/agent.json, status: 200, content_type: text/html, valid: false}
+  - {path: /.well-known/openid-configuration, status: 200, content_type: text/html, valid: false}
+  - {path: /.well-known/oauth-authorization-server, status: 200, content_type: text/html, valid: false}
+  - {path: /.well-known/api-catalog, status: 200, content_type: text/html, valid: false}
+  - {path: /.well-known/ai-plugin.json, status: 200, content_type: text/html, valid: false}
+  - {path: /openapi.json, status: 200, content_type: text/html, valid: false}
+  - {path: /llms.txt, status: 200, content_type: text/html, valid: false}
+
+a2a:
+  found: false
+  note: >-
+    No agent card exists. Per the enrichment contract an agent card is search-only and is
+    never authored on a provider's behalf, so no a2a/ directory is created.

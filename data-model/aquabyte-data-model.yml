@@ -1,0 +1,284 @@
+generated: '2026-08-06'
+method: derived
+source: openapi/aquabyte-data-api-openapi.yml
+summary: >-
+  The Aquabyte data model is a two-level inventory graph — Site has many Pen — with every
+  measurement resource hanging off Pen by the `penId` string field. There are no other
+  cross-entity references: biomass, lice, welfare, behaviour, environmental and harvest
+  records are independent per-pen time series that never reference each other. Identifiers
+  are opaque strings with no type prefix.
+
+entities:
+- name: Site
+  schema: '#/components/schemas/Site'
+  id_field: id
+  id_type: string
+  description: A licensed farming location. Carries the Norwegian government site number and
+    an optional customer-side identifier from a data integration.
+  fields:
+  - {name: id, type: string, role: primary_key}
+  - {name: name, type: string}
+  - {name: governmentSiteNumber, type: integer, nullable: true}
+  - {name: external_site_id, type: string, nullable: true, role: foreign_identifier,
+     note: the corresponding site id from the customer's data integration}
+  - {name: pens, type: array, items: Pen}
+  operations: [get_sites_sites_get, get_sites_siteId_sites__siteId__get]
+
+- name: Pen
+  schema: '#/components/schemas/Pen'
+  id_field: id
+  id_type: string
+  description: A net pen (cage) inside a site. The pivot of the entire API — every
+    measurement resource is keyed by penId, and penId=all fans a query across every pen the
+    key can see.
+  fields:
+  - {name: id, type: string, role: primary_key}
+  - {name: name, type: string}
+  - {name: penCode, type: string, nullable: true}
+  - {name: isActive, type: boolean}
+  - {name: external_id, type: string, nullable: true, role: foreign_identifier}
+  operations: [get_sites_sites_get, get_sites_siteId_sites__siteId__get]
+
+- name: BiomassDaily
+  schema: '#/components/schemas/BiomassDailyModel'
+  grain: pen-day
+  description: Daily average weight, condition factor (kFactor), coefficient of variation
+    and a bucketed weight distribution.
+  fields:
+  - {name: penId, type: string, role: foreign_key, references: Pen}
+  - {name: date, type: string, role: grain}
+  - {name: sampleSize, type: number}
+  - {name: avgWeight, type: number, unit: grams}
+  - {name: kFactor, type: number}
+  - {name: cv, type: number}
+  - {name: weightDist, type: WeightDistModel, role: embedded}
+  operations: [get_biomass_daily_biomass_get, get_biomass_daily_deprecated_pens__penId__biomass_get]
+
+- name: WeightDistModel
+  schema: '#/components/schemas/WeightDistModel'
+  embedded_in: BiomassDaily
+  description: Weight histogram — parallel `interval` and `distribution` arrays, bucket size
+    controlled by the bucketSize query parameter (default 1000 g).
+
+- name: BiomassHarvestReport
+  schema: '#/components/schemas/BiomassHarvestReport'
+  grain: pen-harvest
+  description: Slaughter forecast/actual report for a pen, keyed by slaughter start date.
+    Carries packed and round weight averages, loss factor, packing method (HOG/WFE),
+    superior rate and both weight distributions.
+  fields:
+  - {name: penId, type: string, role: foreign_key, references: Pen}
+  - {name: mainReport, type: boolean}
+  - {name: asOfDate, type: string}
+  - {name: lastFeedingDate, type: string}
+  - {name: slaughterStartDate, type: string, role: grain}
+  - {name: slaughterEndDate, type: string}
+  - {name: temperature, type: number}
+  - {name: lossFactor, type: number}
+  - {name: packingMethod, type: string, nullable: true, enum_note: HOG, WFE, or null for
+     custom loss}
+  - {name: fishType, type: string, nullable: true, note: null for reports created before
+     2025-08-14}
+  - {name: measurementCount, type: integer}
+  - {name: coefficientOfVariation, type: number}
+  - {name: avgPackedWeightGrams, type: number}
+  - {name: avgRoundWeightGrams, type: number}
+  - {name: superiorRate, type: number}
+  - {name: packedWeightDistribution, type: object, note: keys express kg intervals}
+  - {name: roundWeightDistribution, type: object}
+  - {name: createdAt, type: string}
+  operations: [get_biomass_harvest_report_biomass_harvestReport_get,
+    get_biomass_harvest_report_deprecated_pens__penId__biomass_harvestReport_get]
+
+- name: LiceCount
+  schema: '#/components/schemas/LiceCount'
+  grain: pen-day
+  description: Average sea-lice burden per fish, split into adult female, mobile and caligus
+    counts, each with a regulatory "converted" variant.
+  fields:
+  - {name: penId, type: string, role: foreign_key, references: Pen}
+  - {name: date, type: string, role: grain}
+  - {name: sampleSize, type: number}
+  - {name: adultFemale, type: number}
+  - {name: adultFemaleConverted, type: number}
+  - {name: mobile, type: number}
+  - {name: mobileConverted, type: number}
+  - {name: caligus, type: number}
+  operations: [get_pen_lice_count_liceCount_get, get_pen_lice_count_deprecated_pens__penId__liceCount_get]
+
+- name: WelfareScoresRecord
+  schema: '#/components/schemas/WelfareScoresRecord'
+  grain: pen-day
+  description: Daily welfare scoring across 17 named indicators.
+  fields:
+  - {name: penId, type: string, role: foreign_key, references: Pen}
+  - {name: date, type: string, role: grain}
+  - {name: welfareScores, type: WelfareScoresDetail, role: embedded}
+  operations: [get_pen_welfare_data_welfareScores_get, get_pen_welfare_data_deprecated_pens__penId__welfareScores_get]
+
+- name: WelfareScoresDetail
+  schema: '#/components/schemas/WelfareScoresDetail'
+  embedded_in: WelfareScoresRecord
+  description: >-
+    17 nullable indicator slots, each a WelfareScoreDetail: bodyWound, scaleLoss,
+    snoutWound, maturation, eyeBleeding, eyeClouding, exophthalmos, opercularDamage,
+    backDeformity, pelvicFin, pectoralFin, caudalFin, analFin, dorsalFin, upperJawDeformity,
+    lowerJawDeformity, mechHeadWound.
+
+- name: WelfareScoreDetail
+  schema: '#/components/schemas/WelfareScoreDetail'
+  embedded_in: WelfareScoresDetail
+  description: Per-indicator proportions — `active` and `healed` each a
+    WelfareScoreProportions (severity 1/2/3), plus `nothing` (proportion of healthy fish)
+    and `sampleSize`.
+
+- name: SuperiorRateRecord
+  schema: '#/components/schemas/SuperiorRateRecord'
+  grain: pen-day
+  status: experimental
+  description: Preview-stage superior-rate metric with a per-day dataQuality flag
+    (high/medium/low/empty).
+  fields:
+  - {name: penId, type: string, role: foreign_key, references: Pen}
+  - {name: date, type: string, role: grain}
+  - {name: superiorRate, type: number}
+  - {name: dataQuality, type: DataQualityEnum, nullable: true}
+  operations: [get_pen_superior_rate_superiorRate_post]
+
+- name: BehaviorSwimSpeed
+  schema: '#/components/schemas/BehaviorSwimSpeed'
+  grain: pen-period
+  description: Average swim speed (body lengths/second) and swim tilt (degrees) over an
+    hourly or daily period, each with its own sample size.
+  fields:
+  - {name: penId, type: string, role: foreign_key, references: Pen}
+  - {name: fromTime, type: string, role: grain}
+  - {name: toTime, type: string, role: grain}
+  - {name: swimSpeed, type: number}
+  - {name: swimSpeedsampleSize, type: number}
+  - {name: swimTilt, type: number}
+  - {name: swimTiltsampleSize, type: number}
+  operations: [get_behavior_swim_speed_behaviour_swimSpeed_get,
+    get_behavior_swim_speed_deprecated_pens__penId__behavior_swimSpeed_get]
+
+- name: BehaviorBreathingIndex
+  schema: '#/components/schemas/BehaviorBreathingIndex'
+  grain: pen-period
+  description: Breathing index on a 0-1 scale with sample size.
+  fields:
+  - {name: penId, type: string, role: foreign_key, references: Pen}
+  - {name: fromTime, type: string, role: grain}
+  - {name: toTime, type: string, role: grain}
+  - {name: breathingIndex, type: number, range: 0-1}
+  - {name: sampleSize, type: number}
+  operations: [get_behavior_breathing_index_behaviour_breathingIndex_get,
+    get_behavior_breathing_index_deprecated_pens__penId__behavior_breathingIndex_get]
+
+- name: EnvironmentalDataPoint
+  schema: '#/components/schemas/EnvironmentalDataPoint'
+  grain: pen-period
+  description: Aggregated environmental readings — temperature, camera depth (avg/min/max),
+    dissolved oxygen saturation, salinity and fish density — over a 15-minute, hourly or
+    daily period.
+  fields:
+  - {name: penId, type: string, role: foreign_key, references: Pen}
+  - {name: fromTime, type: string, role: grain}
+  - {name: toTime, type: string, role: grain}
+  - {name: temperatureAvg, type: number, unit: celsius}
+  - {name: cameraDepthAvg, type: number, unit: meters}
+  - {name: cameraDepthMin, type: number, unit: meters}
+  - {name: cameraDepthMax, type: number, unit: meters}
+  - {name: oxygenPct, type: number, unit: percent-saturation}
+  - {name: salinity, type: number, unit: ppt}
+  - {name: fishDensity, type: number, range: 0-1}
+  operations: [get_environmental_environmental_get, get_environmental_deprecated_pens__penId__environmental_get]
+
+- name: EnvironmentalDataLive
+  schema: '#/components/schemas/EnvironmentalDataLive'
+  grain: pen-instant
+  description: Latest instantaneous environmental reading for a pen.
+  operations: [get_environmental_latest_all_pens_environmental_latest_get,
+    get_environmental_latest_pens__penId__environmental_latest_get]
+
+relationships:
+- from: Site
+  to: Pen
+  kind: has_many
+  via: pens
+  evidence: Site.pens is an array of $ref Pen
+- from: Pen
+  to: Site
+  kind: belongs_to
+  via: pens (inverse)
+- from: Pen
+  to: BiomassDaily
+  kind: has_many
+  via: penId
+- from: Pen
+  to: BiomassHarvestReport
+  kind: has_many
+  via: penId
+- from: Pen
+  to: LiceCount
+  kind: has_many
+  via: penId
+- from: Pen
+  to: WelfareScoresRecord
+  kind: has_many
+  via: penId
+- from: Pen
+  to: SuperiorRateRecord
+  kind: has_many
+  via: penId
+- from: Pen
+  to: BehaviorSwimSpeed
+  kind: has_many
+  via: penId
+- from: Pen
+  to: BehaviorBreathingIndex
+  kind: has_many
+  via: penId
+- from: Pen
+  to: EnvironmentalDataPoint
+  kind: has_many
+  via: penId
+- from: Pen
+  to: EnvironmentalDataLive
+  kind: has_many
+  via: penId
+- from: BiomassDaily
+  to: WeightDistModel
+  kind: has_one
+  via: weightDist
+- from: WelfareScoresRecord
+  to: WelfareScoresDetail
+  kind: has_one
+  via: welfareScores
+- from: WelfareScoresDetail
+  to: WelfareScoreDetail
+  kind: has_many
+  via: 17 named indicator fields
+- from: WelfareScoreDetail
+  to: WelfareScoreProportions
+  kind: has_many
+  via: [active, healed]
+
+identifiers:
+  style: opaque-string
+  prefixes: none
+  note: >-
+    Site.id and Pen.id are plain strings with no type prefix, so an identifier is not
+    self-describing. `external_site_id` / `external_id` mirror the customer's own system.
+
+enums:
+- name: PeriodEnum
+  values: [h, D]
+- name: Period15mEnum
+  values: [15min, h, D]
+- name: DataQualityEnum
+  values: [high, medium, low, '']
+
+counts:
+  entities: 15
+  relationships: 15
+  schemas_in_spec: 33

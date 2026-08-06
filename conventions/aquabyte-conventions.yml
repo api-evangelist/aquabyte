@@ -1,0 +1,143 @@
+generated: '2026-08-06'
+method: searched
+source: https://api.aquabyte.ai/openapi.json
+docs: https://api.aquabyte.ai/v3/docs
+summary: >-
+  Cross-cutting request/response semantics for the Aquabyte Public API v3.1, captured from
+  the published OpenAPI 3.1 description block and derived from the specification itself.
+  This is a read-only, key-authenticated, time-series data API: every operation but one is
+  a GET, the response envelope is a named collection key plus an optional nextToken cursor,
+  and there is no write, idempotency or webhook surface.
+
+authentication:
+  style: api-key-header
+  header: apikey
+  detail: see authentication/aquabyte-authentication.yml
+  transport: HTTPS only (HSTS enforced on api.aquabyte.ai, max-age 15552000)
+
+versioning:
+  scheme: uri-path
+  current: v3.1
+  base_url: https://api.aquabyte.ai/v3
+  detail: >-
+    The path segment is /v3 for both v3.0 and v3.1; the minor version is a shape change
+    inside that segment rather than a new path. v3.1 moved penId from a path segment to a
+    query parameter — GET /pens/{penId}/biomass became GET /biomass?penId={penId} — and the
+    v3.0 forms remain routable but are flagged `deprecated: true` in the specification.
+  detail_source: info.description
+  migration: >-
+    "You can switch to v3.1 API simply by changing the URL from this pattern
+    GET /pens/{penId}/biomass to this pattern GET /biomass?penId={penId}."
+
+pagination:
+  style: cursor
+  request_param: nextToken
+  response_field: nextToken
+  page_cap: 10000
+  terminal_condition: nextToken absent (or null) in the response
+  applies_to:
+  - /environmental
+  - /biomass
+  - /liceCount
+  - /behaviour/swimSpeed
+  - /behaviour/breathingIndex
+  - /welfareScores
+  not_paginated:
+  - /sites
+  - /sites/{siteId}
+  - /environmental/latest
+  - /biomass/harvestReport
+  - /superiorRate
+  detail: >-
+    "Currently, Aquabyte Public API caps the result set up to 10,000 records. If the result
+    set has more data than the limit, they will be returned in batches. In this case, the
+    response will contain a 'nextToken'." The deprecated v3.0 /pens/{penId}/... operations
+    do NOT carry nextToken — cursor pagination is a v3.1-only capability.
+
+bulk_fetch:
+  parameter: penId
+  magic_value: all
+  detail: >-
+    penId=all fetches every pen with available data in one call, the headline v3.1 feature,
+    intended for mirroring Aquabyte data into a customer's own database. penId also accepts
+    a comma-separated list on the multi-pen operations.
+
+time_windows:
+  date_params: [fromDate, toDate]
+  time_params: [fromTime, toTime]
+  detail: >-
+    Daily-grain resources (biomass, liceCount, welfareScores, harvestReport, superiorRate)
+    take fromDate/toDate; sub-daily resources (environmental, swimSpeed, breathingIndex)
+    take fromTime/toTime.
+  aggregation_param: period
+  aggregation_values:
+    environmental: [15min, h, D]     # Period15mEnum, default D
+    swimSpeed: [h, D]                # PeriodEnum, default D
+  bucketing:
+    param: bucketSize
+    applies_to: /biomass weightDist
+    default_grams: 1000
+
+response_envelope:
+  style: named-collection-key
+  detail: >-
+    Every collection response wraps its rows under a key named for the resource — sites,
+    biomass, liceCount, swimSpeed, breathingIndex, welfareScores, superiorRate, reports,
+    data — alongside the optional nextToken. There is no shared generic envelope schema and
+    no top-level status/meta object.
+
+error_envelope:
+  format: fastapi-validation-error
+  media_type: application/json
+  detail: >-
+    422 responses return the FastAPI HTTPValidationError shape: {"detail": [{"loc": [...],
+    "msg": "...", "type": "..."}]}. RFC 9457 application/problem+json is NOT used. 401 is
+    returned for a missing or invalid apikey but is not documented in the specification.
+  see: errors/aquabyte-problem-types.yml
+
+rate_limiting:
+  documented_limit: 1000 requests/hour
+  source: info.description ("Requests are limited to 1000 requests/hour")
+  response_headers: none documented
+  detail: >-
+    The quota is published in prose but the specification documents no X-RateLimit-* or
+    RateLimit response headers and no 429 response, so an agent cannot read remaining quota
+    mid-run — it can only plan against the stated hourly ceiling.
+  see: rate-limits/aquabyte-rate-limits.yml
+
+idempotency:
+  supported: false
+  detail: >-
+    No idempotency-key contract is published. 18 of 19 operations are GET and therefore
+    idempotent by HTTP method; the single POST (/superiorRate, experimental) accepts no
+    idempotency key and takes its inputs as query parameters. No Idempotency pointer is
+    wired for this provider because no idempotency contract exists to point at.
+
+request_tracing:
+  request_id_header: x-request-id
+  detail: >-
+    api.aquabyte.ai returns an `x-request-id` UUID on responses (observed on the health
+    root). It is not documented in the specification, so it is recorded here as observed
+    behaviour rather than a published contract.
+  observed: '2026-08-06'
+
+field_expansion:
+  supported: false
+metadata:
+  supported: false
+  note: >-
+    Sites and pens carry `external_site_id` / `external_id` — the corresponding identifier
+    from a customer's own data integration — which is the only customer-controlled field on
+    the surface.
+
+events:
+  webhooks: false
+  streaming: false
+  detail: Polling only. No webhook, callback, or streaming surface is published.
+
+cross_links:
+  authentication: authentication/aquabyte-authentication.yml
+  errors: errors/aquabyte-problem-types.yml
+  lifecycle: lifecycle/aquabyte-lifecycle.yml
+  rate_limits: rate-limits/aquabyte-rate-limits.yml
+  data_model: data-model/aquabyte-data-model.yml

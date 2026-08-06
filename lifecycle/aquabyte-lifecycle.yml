@@ -1,0 +1,104 @@
+generated: '2026-08-06'
+method: searched
+source: https://api.aquabyte.ai/openapi.json
+docs: https://api.aquabyte.ai/v3/docs
+summary: >-
+  Aquabyte publishes its versioning and transition posture inside the OpenAPI description
+  block rather than on a policy page. There is no status page, no SLA document and no
+  changelog anywhere on the public surface; what exists is a clearly stated v3.0 -> v3.1
+  migration with eight operations explicitly marked deprecated in the specification.
+
+versioning:
+  scheme: uri-path
+  current: v3.1
+  path_segment: /v3
+  spec_version_field: v3.1
+  docs: https://api.aquabyte.ai/v3/docs
+  note: >-
+    Major version is the /v3 path segment; the v3.0 -> v3.1 minor change is a request-shape
+    change served from the same segment. info.version reports "v3.1".
+
+deprecation:
+  policy_url: null
+  policy_published: in-specification
+  sunset_header: false
+  sunset_date: null
+  statement: >-
+    "Since v3.1 supports everything in v3.0. We recommend switching to v3.1 as soon as
+    possible. v3.0 support continues during the transition."
+  statement_source: https://api.aquabyte.ai/openapi.json (info.description)
+  machine_readable: true
+  machine_readable_detail: >-
+    Eight operations carry `deprecated: true` and are grouped under the tag "v3.0"
+    ("Deprecated. Use v3.1 equivalents."), so a client generator or agent can detect the
+    deprecation from the contract without reading prose. No RFC 8594 Sunset or Deprecation
+    response headers are documented, and no removal date is given.
+
+deprecated_operations:
+- operationId: get_environmental_deprecated_pens__penId__environmental_get
+  path: GET /pens/{penId}/environmental
+  replacement: GET /environmental?penId={penId}
+- operationId: get_environmental_latest_pens__penId__environmental_latest_get
+  path: GET /pens/{penId}/environmental/latest
+  replacement: GET /environmental/latest?penId={penId}
+- operationId: get_biomass_daily_deprecated_pens__penId__biomass_get
+  path: GET /pens/{penId}/biomass
+  replacement: GET /biomass?penId={penId}
+- operationId: get_biomass_harvest_report_deprecated_pens__penId__biomass_harvestReport_get
+  path: GET /pens/{penId}/biomass/harvestReport
+  replacement: GET /biomass/harvestReport?penId={penId}
+- operationId: get_pen_lice_count_deprecated_pens__penId__liceCount_get
+  path: GET /pens/{penId}/liceCount
+  replacement: GET /liceCount?penId={penId}
+- operationId: get_behavior_swim_speed_deprecated_pens__penId__behavior_swimSpeed_get
+  path: GET /pens/{penId}/behavior/swimSpeed
+  replacement: GET /behaviour/swimSpeed?penId={penId}
+- operationId: get_behavior_breathing_index_deprecated_pens__penId__behavior_breathingIndex_get
+  path: GET /pens/{penId}/behavior/breathingIndex
+  replacement: GET /behaviour/breathingIndex?penId={penId}
+- operationId: get_pen_welfare_data_deprecated_pens__penId__welfareScores_get
+  path: GET /pens/{penId}/welfareScores
+  replacement: GET /welfareScores?penId={penId}
+
+experimental_operations:
+- operationId: get_pen_superior_rate_superiorRate_post
+  path: POST /superiorRate
+  note: >-
+    Marked in its own summary as "(Experimental API) ... this is a preview version of
+    superior rate API. The details are subject to change."
+
+status_page:
+  url: null
+  probed:
+  - url: https://status.aquabyte.ai/
+    result: DNS does not resolve
+    checked: '2026-08-06'
+  - url: https://api.aquabyte.ai/health
+    http_status: 200
+    body: OK
+    note: >-
+      A bare liveness endpoint, not a status page — no incident history, no component
+      breakdown, no subscription. Recorded as evidence, not credited as a status page.
+
+sla:
+  url: null
+  uptime_target: null
+
+changelog:
+  url: null
+  note: >-
+    No dated changelog is published. The "What's new in v3.1" block inside the OpenAPI
+    description is the only release note on the public surface, and it is undated. No
+    changelog/ artifact is emitted because there is no dated entry set to structure.
+
+x-evidence:
+- fetched: '2026-08-06'
+  url: https://api.aquabyte.ai/openapi.json
+  http_status: 200
+- fetched: '2026-08-06'
+  url: https://api.aquabyte.ai/health
+  http_status: 200
+- fetched: '2026-08-06'
+  url: https://status.aquabyte.ai/
+  http_status: 0
+  note: NXDOMAIN

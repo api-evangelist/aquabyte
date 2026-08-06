@@ -1,0 +1,212 @@
+generated: '2026-08-06'
+method: generated
+source: openapi/aquabyte-data-api-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 19
+  by_action_class:
+    connected: 18
+    acting: 1
+  by_consequence:
+    read: 18
+    write: 1
+  human_in_the_loop_required: 0
+operations:
+- path: /sites
+  method: get
+  operationId: get_sites_sites_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sites/{siteId}
+  method: get
+  operationId: get_sites_siteId_sites__siteId__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /environmental
+  method: get
+  operationId: get_environmental_environmental_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /pens/{penId}/environmental
+  method: get
+  operationId: get_environmental_deprecated_pens__penId__environmental_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /pens/{penId}/environmental/latest
+  method: get
+  operationId: get_environmental_latest_pens__penId__environmental_latest_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /environmental/latest
+  method: get
+  operationId: get_environmental_latest_all_pens_environmental_latest_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /biomass
+  method: get
+  operationId: get_biomass_daily_biomass_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /pens/{penId}/biomass
+  method: get
+  operationId: get_biomass_daily_deprecated_pens__penId__biomass_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /biomass/harvestReport
+  method: get
+  operationId: get_biomass_harvest_report_biomass_harvestReport_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /pens/{penId}/biomass/harvestReport
+  method: get
+  operationId: get_biomass_harvest_report_deprecated_pens__penId__biomass_harvestReport_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /pens/{penId}/liceCount
+  method: get
+  operationId: get_pen_lice_count_deprecated_pens__penId__liceCount_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /liceCount
+  method: get
+  operationId: get_pen_lice_count_liceCount_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /pens/{penId}/behavior/swimSpeed
+  method: get
+  operationId: get_behavior_swim_speed_deprecated_pens__penId__behavior_swimSpeed_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /behaviour/swimSpeed
+  method: get
+  operationId: get_behavior_swim_speed_behaviour_swimSpeed_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /pens/{penId}/behavior/breathingIndex
+  method: get
+  operationId: get_behavior_breathing_index_deprecated_pens__penId__behavior_breathingIndex_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /behaviour/breathingIndex
+  method: get
+  operationId: get_behavior_breathing_index_behaviour_breathingIndex_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /welfareScores
+  method: get
+  operationId: get_pen_welfare_data_welfareScores_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /pens/{penId}/welfareScores
+  method: get
+  operationId: get_pen_welfare_data_deprecated_pens__penId__welfareScores_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /superiorRate
+  method: post
+  operationId: get_pen_superior_rate_superiorRate_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required

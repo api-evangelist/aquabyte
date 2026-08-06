@@ -1,0 +1,99 @@
+generated: '2026-08-06'
+method: derived
+source: openapi/aquabyte-data-api-openapi.yml
+searched: https://api.aquabyte.ai/v3/docs
+note: >-
+  Derived from the published OpenAPI plus live probes. Aquabyte publishes no certifications,
+  no trust centre and no compliance page, so no `Compliance` pointer is emitted — only the
+  cross-cutting standards actually evidenced in the contract are asserted here.
+
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: >-
+    api.aquabyte.ai/openapi.json returns a parseable OpenAPI 3.1.0 document with 19
+    operations, 33 component schemas and a servers[] block; rendered publicly with ReDoc at
+    /v3/docs.
+- id: json-schema-2020-12
+  conforms: true
+  evidence: OpenAPI 3.1 schemas are JSON Schema 2020-12; the spec uses anyOf-with-null
+    nullability throughout, which is the 2020-12 idiom.
+- id: rest
+  conforms: true
+  evidence: Resource-oriented HTTP with GET for all reads; JSON over HTTPS.
+- id: api-key-authentication
+  conforms: true
+  evidence: '`apikey` request header documented in info.description; unauthenticated request
+    to /v3/sites returns 401.'
+- id: cursor-pagination
+  conforms: true
+  evidence: nextToken request parameter and response field on six collection operations, with
+    a documented 10,000-record cap.
+- id: deprecation-in-spec
+  conforms: true
+  evidence: 'Eight operations carry `deprecated: true` under the "v3.0" tag with documented
+    v3.1 replacements.'
+- id: hsts
+  conforms: true
+  evidence: 'api.aquabyte.ai returns strict-transport-security: max-age=15552000;
+    includeSubDomains (probed 2026-08-06).'
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme; /.well-known/oauth-authorization-server returns 404.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 on api.aquabyte.ai.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 422 responses use the FastAPI HTTPValidationError envelope with media type
+    application/json, not application/problem+json.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on api.aquabyte.ai and 500 on
+    www.aquabyte.ai.
+- id: rfc9727-api-catalog
+  conforms: false
+  evidence: /.well-known/api-catalog returns 404 on api.aquabyte.ai.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation response headers documented; deprecation is expressed
+    only in the specification and in prose.
+- id: rfc9421-http-message-signatures
+  conforms: false
+- id: asyncapi
+  conforms: false
+  evidence: No event, webhook, callback or streaming surface published; the API is
+    poll-only.
+- id: openapi-security-schemes
+  conforms: false
+  evidence: >-
+    The specification declares no components.securitySchemes and no security requirement,
+    so the auth contract the docs describe in prose is not machine-readable. This is the
+    single highest-value contract fix available to Aquabyte.
+- id: mcp
+  conforms: false
+  evidence: No hosted MCP server found; no /mcp endpoint, no registry listing.
+- id: a2a
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json both 404 on api.aquabyte.ai and
+    500 on www.aquabyte.ai. app.aquabyte.ai answers 200 with the same 6,337-byte SPA shell
+    for every path including these two, so it is a catch-all, not a card.
+
+compliance_program:
+  published: false
+  certifications: []
+  trust_center: null
+  note: >-
+    probe-security-programs.py found no vulnerability-disclosure programme and no trust
+    centre (vdp=none trust=none, 2026-08-06). aquabyte.ai/security returns 404. Aquabyte AS
+    is a Norwegian company (org.nr. 919 904 410) and therefore in GDPR scope, and it
+    publishes a privacy policy, but it makes no certification claim on its public surface.
+
+regulatory_context:
+  note: >-
+    Not a compliance claim by Aquabyte — recorded because the data itself is regulatory.
+    Norwegian salmon farming reports sea-lice counts to the Mattilsynet/BarentsWatch regime,
+    and the LiceCount schema's `adultFemaleConverted` / `mobileConverted` fields are the
+    temperature-converted forms that reporting uses. The Site schema likewise carries
+    `governmentSiteNumber`, the official locality number.
