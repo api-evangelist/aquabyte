@@ -33,31 +33,16 @@ tags:
 - Salmon
 - Data
 apis:
-- name: Aquabyte Public API
-  description: 'Read-only REST API over Aquabyte''s aquaculture monitoring data. Version
-    v3.1 exposes site and pen inventory plus historical and latest time-series for
-    biomass (including harvest reports), sea-lice counts, welfare scores, behaviour
-    (swim speed, swim tilt, breathing index) and environmental readings. v3.1 moved
-    penId from a path segment to a query parameter and added penId=all bulk fetching
-    with nextToken cursor pagination capped at 10,000 records per page; the equivalent
-    /pens/{penId}/... operations from v3.0 remain but are marked deprecated in the
-    specification. Authentication is a per-customer API key sent in an apikey request
-    header, and requests are limited to 1,000 per hour.'
+- aid: aquabyte:aquabyte-behaviour-api
+  name: Aquabyte Behaviour API
+  description: Behaviour APIs
   humanURL: https://api.aquabyte.ai/v3/docs
   baseURL: https://api.aquabyte.ai/v3
   tags:
-  - aquaculture
-  - fish-farming
-  - biomass
-  - sea-lice
-  - fish-welfare
-  - fish-behaviour
-  - environmental-monitoring
-  - time-series
-  - rest
+  - behaviour
   properties:
   - type: OpenAPI
-    url: openapi/aquabyte-data-api-openapi.yml
+    url: openapi/aquabyte-behaviour-api-openapi.yml
   - type: Documentation
     url: https://api.aquabyte.ai/v3/docs
   - type: APIReference
@@ -78,10 +63,198 @@ apis:
     url: rate-limits/aquabyte-rate-limits.yml
   - type: Conformance
     url: conformance/aquabyte-conformance.yml
-  - type: Overlay
-    url: overlays/aquabyte-data-api-overlay.yaml
-  - type: AgentSkill
-    url: skills/_index.yml
+  - type: AgenticAccess
+    url: agentic-access/aquabyte-agentic-access.yml
+- aid: aquabyte:aquabyte-biomass-api
+  name: Aquabyte Biomass API
+  description: Biomass APIs
+  humanURL: https://api.aquabyte.ai/v3/docs
+  baseURL: https://api.aquabyte.ai/v3
+  tags:
+  - biomass
+  properties:
+  - type: OpenAPI
+    url: openapi/aquabyte-biomass-api-openapi.yml
+  - type: Documentation
+    url: https://api.aquabyte.ai/v3/docs
+  - type: APIReference
+    url: https://api.aquabyte.ai/v3/docs
+  - type: Authentication
+    url: authentication/aquabyte-authentication.yml
+  - type: Conventions
+    url: conventions/aquabyte-conventions.yml
+  - type: ErrorCatalog
+    url: errors/aquabyte-problem-types.yml
+  - type: DataModel
+    url: data-model/aquabyte-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/aquabyte-lifecycle.yml
+  - type: Deprecation
+    url: lifecycle/aquabyte-lifecycle.yml
+  - type: RateLimits
+    url: rate-limits/aquabyte-rate-limits.yml
+  - type: Conformance
+    url: conformance/aquabyte-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/aquabyte-agentic-access.yml
+- aid: aquabyte:aquabyte-environmental-api
+  name: Aquabyte Environmental API
+  description: The Environmental API from Aquabyte — 2 operation(s) for environmental.
+  humanURL: https://api.aquabyte.ai/v3/docs
+  baseURL: https://api.aquabyte.ai/v3
+  tags:
+  - Environmental
+  properties:
+  - type: OpenAPI
+    url: openapi/aquabyte-environmental-api-openapi.yml
+  - type: Documentation
+    url: https://api.aquabyte.ai/v3/docs
+  - type: APIReference
+    url: https://api.aquabyte.ai/v3/docs
+  - type: Authentication
+    url: authentication/aquabyte-authentication.yml
+  - type: Conventions
+    url: conventions/aquabyte-conventions.yml
+  - type: ErrorCatalog
+    url: errors/aquabyte-problem-types.yml
+  - type: DataModel
+    url: data-model/aquabyte-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/aquabyte-lifecycle.yml
+  - type: Deprecation
+    url: lifecycle/aquabyte-lifecycle.yml
+  - type: RateLimits
+    url: rate-limits/aquabyte-rate-limits.yml
+  - type: Conformance
+    url: conformance/aquabyte-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/aquabyte-agentic-access.yml
+- aid: aquabyte:aquabyte-lice-api
+  name: Aquabyte Lice API
+  description: Lice APIs
+  humanURL: https://api.aquabyte.ai/v3/docs
+  baseURL: https://api.aquabyte.ai/v3
+  tags:
+  - lice
+  properties:
+  - type: OpenAPI
+    url: openapi/aquabyte-lice-api-openapi.yml
+  - type: Documentation
+    url: https://api.aquabyte.ai/v3/docs
+  - type: APIReference
+    url: https://api.aquabyte.ai/v3/docs
+  - type: Authentication
+    url: authentication/aquabyte-authentication.yml
+  - type: Conventions
+    url: conventions/aquabyte-conventions.yml
+  - type: ErrorCatalog
+    url: errors/aquabyte-problem-types.yml
+  - type: DataModel
+    url: data-model/aquabyte-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/aquabyte-lifecycle.yml
+  - type: Deprecation
+    url: lifecycle/aquabyte-lifecycle.yml
+  - type: RateLimits
+    url: rate-limits/aquabyte-rate-limits.yml
+  - type: Conformance
+    url: conformance/aquabyte-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/aquabyte-agentic-access.yml
+- aid: aquabyte:aquabyte-sites-api
+  name: Aquabyte Sites API
+  description: The Sites API from Aquabyte — 2 operation(s) for sites.
+  humanURL: https://api.aquabyte.ai/v3/docs
+  baseURL: https://api.aquabyte.ai/v3
+  tags:
+  - Sites
+  properties:
+  - type: OpenAPI
+    url: openapi/aquabyte-sites-api-openapi.yml
+  - type: Documentation
+    url: https://api.aquabyte.ai/v3/docs
+  - type: APIReference
+    url: https://api.aquabyte.ai/v3/docs
+  - type: Authentication
+    url: authentication/aquabyte-authentication.yml
+  - type: Conventions
+    url: conventions/aquabyte-conventions.yml
+  - type: ErrorCatalog
+    url: errors/aquabyte-problem-types.yml
+  - type: DataModel
+    url: data-model/aquabyte-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/aquabyte-lifecycle.yml
+  - type: Deprecation
+    url: lifecycle/aquabyte-lifecycle.yml
+  - type: RateLimits
+    url: rate-limits/aquabyte-rate-limits.yml
+  - type: Conformance
+    url: conformance/aquabyte-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/aquabyte-agentic-access.yml
+- aid: aquabyte:aquabyte-v3-0-api
+  name: Aquabyte V3.0 API
+  description: Deprecated. Use v3.1 equivalents.
+  humanURL: https://api.aquabyte.ai/v3/docs
+  baseURL: https://api.aquabyte.ai/v3
+  tags:
+  - v3.0
+  properties:
+  - type: OpenAPI
+    url: openapi/aquabyte-v3-0-api-openapi.yml
+  - type: Documentation
+    url: https://api.aquabyte.ai/v3/docs
+  - type: APIReference
+    url: https://api.aquabyte.ai/v3/docs
+  - type: Authentication
+    url: authentication/aquabyte-authentication.yml
+  - type: Conventions
+    url: conventions/aquabyte-conventions.yml
+  - type: ErrorCatalog
+    url: errors/aquabyte-problem-types.yml
+  - type: DataModel
+    url: data-model/aquabyte-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/aquabyte-lifecycle.yml
+  - type: Deprecation
+    url: lifecycle/aquabyte-lifecycle.yml
+  - type: RateLimits
+    url: rate-limits/aquabyte-rate-limits.yml
+  - type: Conformance
+    url: conformance/aquabyte-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/aquabyte-agentic-access.yml
+- aid: aquabyte:aquabyte-welfare-api
+  name: Aquabyte Welfare API
+  description: Welfare APIs
+  humanURL: https://api.aquabyte.ai/v3/docs
+  baseURL: https://api.aquabyte.ai/v3
+  tags:
+  - welfare
+  properties:
+  - type: OpenAPI
+    url: openapi/aquabyte-welfare-api-openapi.yml
+  - type: Documentation
+    url: https://api.aquabyte.ai/v3/docs
+  - type: APIReference
+    url: https://api.aquabyte.ai/v3/docs
+  - type: Authentication
+    url: authentication/aquabyte-authentication.yml
+  - type: Conventions
+    url: conventions/aquabyte-conventions.yml
+  - type: ErrorCatalog
+    url: errors/aquabyte-problem-types.yml
+  - type: DataModel
+    url: data-model/aquabyte-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/aquabyte-lifecycle.yml
+  - type: Deprecation
+    url: lifecycle/aquabyte-lifecycle.yml
+  - type: RateLimits
+    url: rate-limits/aquabyte-rate-limits.yml
+  - type: Conformance
+    url: conformance/aquabyte-conformance.yml
   - type: AgenticAccess
     url: agentic-access/aquabyte-agentic-access.yml
 maintainers:
@@ -90,6 +263,10 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgentSkill
+  url: skills/aquabyte-harvest-planning.md
+- type: Overlay
+  url: overlays/aquabyte-data-api-overlay.yaml
 - type: Website
   url: https://www.aquabyte.ai/
 - type: Documentation
