@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Aquabyte API Documentation Environmental API",
+    "version": "v3.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Environmental",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Historical environmental data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/environmental",
+            "params": [
+              {
+                "name": "penId",
+                "value": "",
+                "type": "query",
+                "description": "penId to query. Use \"all\" to query all pens"
+              },
+              {
+                "name": "fromTime",
+                "value": "",
+                "type": "query",
+                "description": "from time. Default is 1 days ago"
+              },
+              {
+                "name": "toTime",
+                "value": "",
+                "type": "query",
+                "description": "to time (exclusive). Default is today"
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "aggregation period of the metric. Default is daily"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "(optional) token to fetch the next batch of result"
+              }
+            ]
+          },
+          "docs": "Historical environmental data"
+        },
+        {
+          "info": {
+            "name": "Latest environmental data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/environmental/latest",
+            "params": [
+              {
+                "name": "penId",
+                "value": "",
+                "type": "query",
+                "description": "penId to query. Use \"all\" to query all pens"
+              }
+            ]
+          },
+          "docs": "Latest environmental data"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

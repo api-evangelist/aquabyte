@@ -1,0 +1,263 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Aquabyte API Documentation V3.0 API",
+    "version": "v3.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "v3.0",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Historical environmental data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/pens/:penId/environmental",
+            "params": [
+              {
+                "name": "penId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fromTime",
+                "value": "",
+                "type": "query",
+                "description": "from time. Default is 1 days ago"
+              },
+              {
+                "name": "toTime",
+                "value": "",
+                "type": "query",
+                "description": "to time (exclusive). Default is today"
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "aggregation period of the metric. Default is daily"
+              }
+            ]
+          },
+          "docs": "Historical environmental data"
+        },
+        {
+          "info": {
+            "name": "Latest environmental data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/pens/:penId/environmental/latest",
+            "params": [
+              {
+                "name": "penId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Latest environmental data"
+        },
+        {
+          "info": {
+            "name": "Biomass data for a pen",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/pens/:penId/biomass",
+            "params": [
+              {
+                "name": "penId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "from date. Default is 7 days before toDate"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "to date (inclusive). Default is today"
+              },
+              {
+                "name": "bucketSize",
+                "value": "",
+                "type": "query",
+                "description": "weightDist bucket size. Default 1000g"
+              }
+            ]
+          },
+          "docs": "Biomass data for a pen"
+        },
+        {
+          "info": {
+            "name": "Biomass harvest reports in the date range (by slaughter start)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/pens/:penId/biomass/harvestReport",
+            "params": [
+              {
+                "name": "penId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "to date (inclusive). Default is today"
+              }
+            ]
+          },
+          "docs": "Returns main reports. If there is no main report, returns the latest one."
+        },
+        {
+          "info": {
+            "name": "Lice count for one or more pens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/pens/:penId/liceCount",
+            "params": [
+              {
+                "name": "penId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "from date. Default is 7 days before toDate"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "to date (inclusive). Default is today"
+              }
+            ]
+          },
+          "docs": "Lice count for one or more pens"
+        },
+        {
+          "info": {
+            "name": "Swim speed and swim tilt for a pen",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/pens/:penId/behavior/swimSpeed",
+            "params": [
+              {
+                "name": "penId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fromTime",
+                "value": "",
+                "type": "query",
+                "description": "from time. Default is 7 days before toTime"
+              },
+              {
+                "name": "toTime",
+                "value": "",
+                "type": "query",
+                "description": "to time (exclusive). Default is today"
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "period of the metric. Default is daily"
+              }
+            ]
+          },
+          "docs": "Swim speed and swim tilt for a pen"
+        },
+        {
+          "info": {
+            "name": "Breathing index for a pen",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/pens/:penId/behavior/breathingIndex",
+            "params": [
+              {
+                "name": "penId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fromTime",
+                "value": "",
+                "type": "query",
+                "description": "from time. Default is 7 days before toTime"
+              },
+              {
+                "name": "toTime",
+                "value": "",
+                "type": "query",
+                "description": "to time (exclusive). Default is today"
+              }
+            ]
+          },
+          "docs": "Breathing index for a pen"
+        },
+        {
+          "info": {
+            "name": "Welfare scores for one or more pens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/pens/:penId/welfareScores",
+            "params": [
+              {
+                "name": "penId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "from date. Default is 7 days before toDate"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "to date (inclusive). Default is today"
+              }
+            ]
+          },
+          "docs": "Welfare scores for one or more pens"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

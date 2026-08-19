@@ -1,0 +1,268 @@
+openapi: 3.2.0
+info:
+  title: Aquabyte API Documentation Behaviour API
+  description: "\n# Aquabyte Public API\n\nTo use our API you must be issued an API key.\n\nInstructions: For all HTTPS requests you will need to pass in your API key as part of the header:\n`apikey: {API_KEY}`\n\nOur base url is https://api.aquabyte.ai/v3/\n\nRequests are limited to 1000 requests/hour\n\n\n# What's new in v3.1\n\nWith v3.1, we have added new APIs to support bulk fetching. One of the\nmain use case is for users to download Aquabyte data into their own database.\nThe new API allows us to download all pens with available data in a single call.\nFor example, to fetch biomass data for all pens, you can use the following API call:\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2026-01-01&toDate=2026-01-02\"\n```\n\nYou can switch to v3.1 API simply by changing the URL from this pattern\n`GET /pens/{penId}/biomass` to this pattern `GET /biomass?penId={penId}`. Similar\npattern is used for other data - environmental, lice, welfare and behaviour.\n\nSince v3.1 supports everything in v3.0. We recommend switching to v3.1 as soon as possible.\nv3.0 support continues during the transition.\n\n\n## Result pagination\n\nCurrently, Aquabyte Public API caps the result set up to 10,000 records.\nIf the result set has more data than the limit, they will be returned in batches.\nIn this case, the response will contain a \"nextToken\". For example:\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2025-01-01&toDate=2025-12-31\"\n\n\nIt returns\n\n{\n  \"biomass\": [\n    ... up to limit number of records ...\n  ]\n  \"nextToken\": \"(A_TOKEN)\"\n}\n```\n\nTo fetch the next batch of data, repeat the request and add the \"nextToken\" to the query parameters.\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2025-01-01&toDate=2025-12-31&nextToken=(A_TOKEN)\"\n```\n\nRepeating the request until \"nextToken\" is not present in the response.\nThis indicates that you have fetched all data.\n\n"
+  version: v3.1
+servers:
+- url: /v3
+- url: https://api.aquabyte.ai/v3
+  description: Aquabyte API Server
+tags:
+- name: behaviour
+  description: Behaviour APIs
+paths:
+  /behaviour/swimSpeed:
+    get:
+      tags:
+      - behaviour
+      summary: Swim speed and swim tilt for a pen
+      operationId: get_behavior_swim_speed_behaviour_swimSpeed_get
+      parameters:
+      - name: penId
+        in: query
+        required: true
+        schema:
+          type: string
+          description: penId to query. Use "all" to query all pens
+        description: penId to query. Use "all" to query all pens
+      - name: fromTime
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: from time. Default is 7 days before toTime
+        description: from time. Default is 7 days before toTime
+      - name: toTime
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: to time (exclusive). Default is today
+        description: to time (exclusive). Default is today
+      - name: period
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/PeriodEnum'
+          - type: 'null'
+          description: period of the metric. Default is daily
+          default: D
+        description: period of the metric. Default is daily
+      - name: nextToken
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: (optional) token to fetch the next batch of result
+        description: (optional) token to fetch the next batch of result
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/aqua_api__paginator__append_next_token___locals___Wrapped__4'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /behaviour/breathingIndex:
+    get:
+      tags:
+      - behaviour
+      summary: Breathing index for a pen
+      operationId: get_behavior_breathing_index_behaviour_breathingIndex_get
+      parameters:
+      - name: penId
+        in: query
+        required: true
+        schema:
+          type: string
+          description: penId to query. Use "all" to query all pens
+        description: penId to query. Use "all" to query all pens
+      - name: fromTime
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: from time. Default is 7 days before toTime
+        description: from time. Default is 7 days before toTime
+      - name: toTime
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: to time (exclusive). Default is today
+        description: to time (exclusive). Default is today
+      - name: nextToken
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: (optional) token to fetch the next batch of result
+        description: (optional) token to fetch the next batch of result
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/aqua_api__paginator__append_next_token___locals___Wrapped__5'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    aqua_api__paginator__append_next_token___locals___Wrapped__5:
+      properties:
+        breathingIndex:
+          items:
+            $ref: '#/components/schemas/BehaviorBreathingIndex'
+          type: array
+        nextToken:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
+      type: object
+      required:
+      - breathingIndex
+      title: Wrapped
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input: {}
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    BehaviorSwimSpeed:
+      properties:
+        penId:
+          type: string
+        fromTime:
+          type: string
+          format: date-time
+        toTime:
+          type: string
+          format: date-time
+        swimSpeedsampleSize:
+          type: number
+          description: Number of samples used for swimSpeed
+        swimSpeed:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Average swim speed (body length/s)
+        swimTiltsampleSize:
+          type: number
+          description: Number of samples used for swimTilt
+        swimTilt:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Average Swim Tilt (degree)
+      type: object
+      required:
+      - penId
+      - fromTime
+      - toTime
+      - swimSpeedsampleSize
+      - swimSpeed
+      - swimTiltsampleSize
+      - swimTilt
+      title: BehaviorSwimSpeed
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+      type: object
+      title: HTTPValidationError
+    aqua_api__paginator__append_next_token___locals___Wrapped__4:
+      properties:
+        swimSpeed:
+          items:
+            $ref: '#/components/schemas/BehaviorSwimSpeed'
+          type: array
+        nextToken:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
+      type: object
+      required:
+      - swimSpeed
+      title: Wrapped
+    PeriodEnum:
+      type: string
+      enum:
+      - h
+      - D
+      title: PeriodEnum
+    BehaviorBreathingIndex:
+      properties:
+        penId:
+          type: string
+        fromTime:
+          type: string
+          format: date-time
+        toTime:
+          type: string
+          format: date-time
+        sampleSize:
+          type: number
+          description: Number of samples used for breathingIndex
+        breathingIndex:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Breathing index (0 to 1)
+      type: object
+      required:
+      - penId
+      - fromTime
+      - toTime
+      - sampleSize
+      - breathingIndex
+      title: BehaviorBreathingIndex

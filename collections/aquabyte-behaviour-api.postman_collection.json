@@ -1,0 +1,374 @@
+{
+  "item": [
+    {
+      "id": "f09af49b-52cf-450b-a841-0e44ee6a5901",
+      "name": "behaviour",
+      "description": {
+        "content": "Behaviour APIs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "75c80142-bbb1-4588-aeaf-01bd499aed3a",
+          "name": "Swim speed and swim tilt for a pen",
+          "request": {
+            "name": "Swim speed and swim tilt for a pen",
+            "description": {},
+            "url": {
+              "path": [
+                "behaviour",
+                "swimSpeed"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "penId",
+                  "value": "<string>",
+                  "description": "(Required) penId to query. Use \"all\" to query all pens"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromTime",
+                  "value": "<dateTime>",
+                  "description": "from time. Default is 7 days before toTime"
+                },
+                {
+                  "disabled": false,
+                  "key": "toTime",
+                  "value": "<dateTime>",
+                  "description": "to time (exclusive). Default is today"
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "period of the metric. Default is daily"
+                },
+                {
+                  "disabled": false,
+                  "key": "nextToken",
+                  "value": "<string>",
+                  "description": "(optional) token to fetch the next batch of result"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c515f4d-4caa-4079-a9ef-f04c2c45f790",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "behaviour",
+                    "swimSpeed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "penId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "toTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"swimSpeed\": [\n    {\n      \"penId\": \"string\",\n      \"fromTime\": \"2015-09-16T11:36:36.623Z\",\n      \"toTime\": \"1992-04-14T18:31:07.981Z\",\n      \"swimSpeedsampleSize\": 5324.248177831905,\n      \"swimSpeed\": 8543.609015929533,\n      \"swimTiltsampleSize\": 8856.597208823167,\n      \"swimTilt\": 3063.0404921991308\n    },\n    {\n      \"penId\": \"string\",\n      \"fromTime\": \"1980-03-17T08:52:34.073Z\",\n      \"toTime\": \"1989-03-27T23:02:18.362Z\",\n      \"swimSpeedsampleSize\": 613.1789781856412,\n      \"swimSpeed\": 1513.554269562134,\n      \"swimTiltsampleSize\": 8654.795830507923,\n      \"swimTilt\": 1896.4336030205864\n    }\n  ],\n  \"nextToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db6fa34f-7fa8-4877-a990-fb0cac2141b6",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "behaviour",
+                    "swimSpeed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "penId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "toTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c44a336c-f094-4f2e-948b-8ebd4922c659",
+          "name": "Breathing index for a pen",
+          "request": {
+            "name": "Breathing index for a pen",
+            "description": {},
+            "url": {
+              "path": [
+                "behaviour",
+                "breathingIndex"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "penId",
+                  "value": "<string>",
+                  "description": "(Required) penId to query. Use \"all\" to query all pens"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromTime",
+                  "value": "<dateTime>",
+                  "description": "from time. Default is 7 days before toTime"
+                },
+                {
+                  "disabled": false,
+                  "key": "toTime",
+                  "value": "<dateTime>",
+                  "description": "to time (exclusive). Default is today"
+                },
+                {
+                  "disabled": false,
+                  "key": "nextToken",
+                  "value": "<string>",
+                  "description": "(optional) token to fetch the next batch of result"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44459dbc-688c-4fe0-a37e-a21f7aaf737e",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "behaviour",
+                    "breathingIndex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "penId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "toTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"breathingIndex\": [\n    {\n      \"penId\": \"string\",\n      \"fromTime\": \"2017-11-26T14:22:02.157Z\",\n      \"toTime\": \"1987-02-02T20:19:22.074Z\",\n      \"sampleSize\": 7028.04764285558,\n      \"breathingIndex\": 9906.76185451583\n    },\n    {\n      \"penId\": \"string\",\n      \"fromTime\": \"2026-03-22T20:34:43.159Z\",\n      \"toTime\": \"1951-02-02T00:30:24.381Z\",\n      \"sampleSize\": 9928.086850662463,\n      \"breathingIndex\": 3694.2357570383756\n    }\n  ],\n  \"nextToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51c8b3f7-3a40-4198-8c17-1e55daad5d3f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "behaviour",
+                    "breathingIndex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "penId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "toTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c75f89e7-e0ca-4d8e-a8a9-c10a604c685d",
+    "name": "Aquabyte API Documentation Behaviour API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n# Aquabyte Public API\n\nTo use our API you must be issued an API key.\n\nInstructions: For all HTTPS requests you will need to pass in your API key as part of the header:\n`apikey: {API_KEY}`\n\nOur base url is https://api.aquabyte.ai/v3/\n\nRequests are limited to 1000 requests/hour\n\n\n# What's new in v3.1\n\nWith v3.1, we have added new APIs to support bulk fetching. One of the\nmain use case is for users to download Aquabyte data into their own database.\nThe new API allows us to download all pens with available data in a single call.\nFor example, to fetch biomass data for all pens, you can use the following API call:\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2026-01-01&toDate=2026-01-02\"\n```\n\nYou can switch to v3.1 API simply by changing the URL from this pattern\n`GET /pens/{penId}/biomass` to this pattern `GET /biomass?penId={penId}`. Similar\npattern is used for other data - environmental, lice, welfare and behaviour.\n\nSince v3.1 supports everything in v3.0. We recommend switching to v3.1 as soon as possible.\nv3.0 support continues during the transition.\n\n\n## Result pagination\n\nCurrently, Aquabyte Public API caps the result set up to 10,000 records.\nIf the result set has more data than the limit, they will be returned in batches.\nIn this case, the response will contain a \"nextToken\". For example:\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2025-01-01&toDate=2025-12-31\"\n\n\nIt returns\n\n{\n  \"biomass\": [\n    ... up to limit number of records ...\n  ]\n  \"nextToken\": \"(A_TOKEN)\"\n}\n```\n\nTo fetch the next batch of data, repeat the request and add the \"nextToken\" to the query parameters.\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2025-01-01&toDate=2025-12-31&nextToken=(A_TOKEN)\"\n```\n\nRepeating the request until \"nextToken\" is not present in the response.\nThis indicates that you have fetched all data.\n\n",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,458 @@
+openapi: 3.2.0
+info:
+  title: Aquabyte API Documentation Welfare API
+  description: "\n# Aquabyte Public API\n\nTo use our API you must be issued an API key.\n\nInstructions: For all HTTPS requests you will need to pass in your API key as part of the header:\n`apikey: {API_KEY}`\n\nOur base url is https://api.aquabyte.ai/v3/\n\nRequests are limited to 1000 requests/hour\n\n\n# What's new in v3.1\n\nWith v3.1, we have added new APIs to support bulk fetching. One of the\nmain use case is for users to download Aquabyte data into their own database.\nThe new API allows us to download all pens with available data in a single call.\nFor example, to fetch biomass data for all pens, you can use the following API call:\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2026-01-01&toDate=2026-01-02\"\n```\n\nYou can switch to v3.1 API simply by changing the URL from this pattern\n`GET /pens/{penId}/biomass` to this pattern `GET /biomass?penId={penId}`. Similar\npattern is used for other data - environmental, lice, welfare and behaviour.\n\nSince v3.1 supports everything in v3.0. We recommend switching to v3.1 as soon as possible.\nv3.0 support continues during the transition.\n\n\n## Result pagination\n\nCurrently, Aquabyte Public API caps the result set up to 10,000 records.\nIf the result set has more data than the limit, they will be returned in batches.\nIn this case, the response will contain a \"nextToken\". For example:\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2025-01-01&toDate=2025-12-31\"\n\n\nIt returns\n\n{\n  \"biomass\": [\n    ... up to limit number of records ...\n  ]\n  \"nextToken\": \"(A_TOKEN)\"\n}\n```\n\nTo fetch the next batch of data, repeat the request and add the \"nextToken\" to the query parameters.\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2025-01-01&toDate=2025-12-31&nextToken=(A_TOKEN)\"\n```\n\nRepeating the request until \"nextToken\" is not present in the response.\nThis indicates that you have fetched all data.\n\n"
+  version: v3.1
+servers:
+- url: /v3
+- url: https://api.aquabyte.ai/v3
+  description: Aquabyte API Server
+tags:
+- name: welfare
+  description: Welfare APIs
+paths:
+  /welfareScores:
+    get:
+      tags:
+      - welfare
+      summary: Welfare scores for one or more pens
+      operationId: get_pen_welfare_data_welfareScores_get
+      parameters:
+      - name: penId
+        in: query
+        required: true
+        schema:
+          type: string
+          description: penId to query. Use "all" to query all pens
+        description: penId to query. Use "all" to query all pens
+      - name: fromDate
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          description: from date. Default is 7 days before toDate
+        description: from date. Default is 7 days before toDate
+      - name: toDate
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          description: to date (inclusive). Default is today
+        description: to date (inclusive). Default is today
+      - name: nextToken
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: (optional) token to fetch the next batch of result
+        description: (optional) token to fetch the next batch of result
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/aqua_api__paginator__append_next_token___locals___Wrapped__6'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /superiorRate:
+    post:
+      tags:
+      - welfare
+      summary: '(Experimental API) Superior rate for a pen. Note: this is a preview version of superior rate API. The details are subject to change. '
+      operationId: get_pen_superior_rate_superiorRate_post
+      parameters:
+      - name: penId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          description: from date. Default is 7 days before toDate
+        description: from date. Default is 7 days before toDate
+      - name: toDate
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          description: to date (inclusive). Default is today
+        description: to date (inclusive). Default is today
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DowngradeRuleset'
+              description: Downgrade ruleset to apply
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuperiorRateResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    WelfareScoresRecord:
+      properties:
+        penId:
+          type: string
+          description: Pen identifier
+        date:
+          type: string
+          format: date
+          description: Date of the welfare scores
+        welfareScores:
+          $ref: '#/components/schemas/WelfareScoresDetail'
+          description: Welfare scores for the day
+      type: object
+      required:
+      - penId
+      - date
+      - welfareScores
+      title: WelfareScoresRecord
+    DowngradeRuleset:
+      properties:
+        bodyWound:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScoresSubcategory'
+          - type: 'null'
+          description: Downgrade rules for body wounds
+        scaleLoss:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScores'
+          - type: 'null'
+          description: Downgrade rules for scale loss
+        snoutWound:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScores'
+          - type: 'null'
+          description: Downgrade rules for snout wounds
+        maturation:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScores'
+          - type: 'null'
+          description: Downgrade rules for maturation
+        eyeBleeding:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScores'
+          - type: 'null'
+          description: Downgrade rules for eye bleeding
+        eyeClouding:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScores'
+          - type: 'null'
+          description: Downgrade rules for eye clouding
+        exophthalmos:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScores'
+          - type: 'null'
+          description: Downgrade rules for exophthalmos
+        opercularDamage:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScores'
+          - type: 'null'
+          description: Downgrade rules for opercular damage
+        backDeformity:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScores'
+          - type: 'null'
+          description: Downgrade rules for back deformity
+        pelvicFin:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScores'
+          - type: 'null'
+          description: Downgrade rules for pelvic fin
+        pectoralFin:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScores'
+          - type: 'null'
+          description: Downgrade rules for pectoral fin
+        caudalFin:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScores'
+          - type: 'null'
+          description: Downgrade rules for caudal fin
+        analFin:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScores'
+          - type: 'null'
+          description: Downgrade rules for anal fin
+        dorsalFin:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScores'
+          - type: 'null'
+          description: Downgrade rules for dorsal fin
+        upperJawDeformity:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScores'
+          - type: 'null'
+          description: Downgrade rules for upper_jaw_deformity
+        lowerJawDeformity:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScores'
+          - type: 'null'
+          description: Downgrade rules for lower_jaw_deformity
+        breathingMouth:
+          anyOf:
+          - $ref: '#/components/schemas/DowngradeScores'
+          - type: 'null'
+          description: Downgrade rules for breathing_mouth
+      additionalProperties: false
+      type: object
+      title: DowngradeRuleset
+    WelfareScoreProportions:
+      properties:
+        '1':
+          type: number
+          description: Proportion of fish with score 1
+        '2':
+          type: number
+          description: Proportion of fish with score 2
+        '3':
+          type: number
+          description: Proportion of fish with score 3
+      type: object
+      required:
+      - '1'
+      - '2'
+      - '3'
+      title: WelfareScoreProportions
+    DowngradeScores:
+      properties:
+        score1:
+          type: number
+          description: Downgrade score for score 1
+          default: 0.0
+        score2:
+          type: number
+          description: Downgrade score for score 2
+          default: 0.0
+        score3:
+          type: number
+          description: Downgrade score for score 3
+          default: 0.0
+      type: object
+      title: DowngradeScores
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+      type: object
+      title: HTTPValidationError
+    WelfareScoreDetail:
+      properties:
+        active:
+          $ref: '#/components/schemas/WelfareScoreProportions'
+          description: Proportions of active welfare scores
+        nothing:
+          type: number
+          description: Proportion of healthy fish
+        sampleSize:
+          type: number
+          description: Number of samples used to calculate scores
+        healed:
+          $ref: '#/components/schemas/WelfareScoreProportions'
+          description: Proportions of healed welfare scores
+      type: object
+      required:
+      - active
+      - nothing
+      - sampleSize
+      title: WelfareScoreDetail
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input: {}
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    DataQualityEnum:
+      type: string
+      enum:
+      - high
+      - medium
+      - low
+      - ''
+      title: DataQualityEnum
+    SuperiorRateResponse:
+      properties:
+        superiorRate:
+          items:
+            $ref: '#/components/schemas/SuperiorRateRecord'
+          type: array
+          description: List of superior rate records
+      type: object
+      required:
+      - superiorRate
+      title: SuperiorRateResponse
+    DowngradeScoresSubcategory:
+      properties:
+        active:
+          $ref: '#/components/schemas/DowngradeScores'
+          description: Downgrade scores for active wounds
+        healed:
+          $ref: '#/components/schemas/DowngradeScores'
+          description: Downgrade scores for healed wounds
+      type: object
+      title: DowngradeScoresSubcategory
+    SuperiorRateRecord:
+      properties:
+        penId:
+          type: string
+          description: Pen identifier
+        date:
+          type: string
+          format: date
+          description: Date of the superior rate record
+        superiorRate:
+          type: number
+          description: Superior rate value for the pen on the given date
+        dataQuality:
+          anyOf:
+          - $ref: '#/components/schemas/DataQualityEnum'
+          - type: 'null'
+          description: Data quality for the day
+      type: object
+      required:
+      - penId
+      - date
+      - superiorRate
+      - dataQuality
+      title: SuperiorRateRecord
+    aqua_api__paginator__append_next_token___locals___Wrapped__6:
+      properties:
+        welfareScores:
+          items:
+            $ref: '#/components/schemas/WelfareScoresRecord'
+          type: array
+          description: List of welfare scores records
+        nextToken:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
+      type: object
+      required:
+      - welfareScores
+      title: Wrapped
+    WelfareScoresDetail:
+      properties:
+        bodyWound:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+        scaleLoss:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+        snoutWound:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+        maturation:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+        eyeBleeding:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+        eyeClouding:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+        exophthalmos:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+        opercularDamage:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+        backDeformity:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+        pelvicFin:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+        pectoralFin:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+        caudalFin:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+        analFin:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+        dorsalFin:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+        upperJawDeformity:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+        lowerJawDeformity:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+        mechHeadWound:
+          anyOf:
+          - $ref: '#/components/schemas/WelfareScoreDetail'
+          - type: 'null'
+      type: object
+      title: WelfareScoresDetail

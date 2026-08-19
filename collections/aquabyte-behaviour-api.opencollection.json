@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Aquabyte API Documentation Behaviour API",
+    "version": "v3.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "behaviour",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Swim speed and swim tilt for a pen",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/behaviour/swimSpeed",
+            "params": [
+              {
+                "name": "penId",
+                "value": "",
+                "type": "query",
+                "description": "penId to query. Use \"all\" to query all pens"
+              },
+              {
+                "name": "fromTime",
+                "value": "",
+                "type": "query",
+                "description": "from time. Default is 7 days before toTime"
+              },
+              {
+                "name": "toTime",
+                "value": "",
+                "type": "query",
+                "description": "to time (exclusive). Default is today"
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "period of the metric. Default is daily"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "(optional) token to fetch the next batch of result"
+              }
+            ]
+          },
+          "docs": "Swim speed and swim tilt for a pen"
+        },
+        {
+          "info": {
+            "name": "Breathing index for a pen",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/behaviour/breathingIndex",
+            "params": [
+              {
+                "name": "penId",
+                "value": "",
+                "type": "query",
+                "description": "penId to query. Use \"all\" to query all pens"
+              },
+              {
+                "name": "fromTime",
+                "value": "",
+                "type": "query",
+                "description": "from time. Default is 7 days before toTime"
+              },
+              {
+                "name": "toTime",
+                "value": "",
+                "type": "query",
+                "description": "to time (exclusive). Default is today"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "(optional) token to fetch the next batch of result"
+              }
+            ]
+          },
+          "docs": "Breathing index for a pen"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

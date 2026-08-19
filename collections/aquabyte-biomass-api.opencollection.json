@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Aquabyte API Documentation Biomass API",
+    "version": "v3.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "biomass",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Biomass data for a pen",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/biomass",
+            "params": [
+              {
+                "name": "penId",
+                "value": "",
+                "type": "query",
+                "description": "penId to query. Use \"all\" to query all pens"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "from date. Default is 7 days before toDate"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "to date (inclusive). Default is today"
+              },
+              {
+                "name": "bucketSize",
+                "value": "",
+                "type": "query",
+                "description": "weightDist bucket size. Default 1000g"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "(optional) token to fetch the next batch of result"
+              }
+            ]
+          },
+          "docs": "Biomass data for a pen"
+        },
+        {
+          "info": {
+            "name": "Biomass harvest reports in the date range (by slaughter start)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/biomass/harvestReport",
+            "params": [
+              {
+                "name": "penId",
+                "value": "",
+                "type": "query",
+                "description": "penId to query. Use \"all\" to query all pens"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "from date. Default is 7 days before toDate"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "to date (inclusive). Default is today"
+              }
+            ]
+          },
+          "docs": "Returns main reports. If there is no main report, returns the latest one."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

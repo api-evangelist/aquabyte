@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Aquabyte API Documentation Welfare API",
+    "version": "v3.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "welfare",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Welfare scores for one or more pens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/welfareScores",
+            "params": [
+              {
+                "name": "penId",
+                "value": "",
+                "type": "query",
+                "description": "penId to query. Use \"all\" to query all pens"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "from date. Default is 7 days before toDate"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "to date (inclusive). Default is today"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "(optional) token to fetch the next batch of result"
+              }
+            ]
+          },
+          "docs": "Welfare scores for one or more pens"
+        },
+        {
+          "info": {
+            "name": "(Experimental API) Superior rate for a pen. Note: this is a preview version of superior rate API. The details are subject to change. ",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v3/superiorRate",
+            "params": [
+              {
+                "name": "penId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "from date. Default is 7 days before toDate"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "to date (inclusive). Default is today"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "(Experimental API) Superior rate for a pen. Note: this is a preview version of superior rate API. The details are subject to change. "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

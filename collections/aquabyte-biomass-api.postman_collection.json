@@ -1,0 +1,360 @@
+{
+  "item": [
+    {
+      "id": "e2e473c2-b279-45b7-99f3-33249c6cb4bc",
+      "name": "biomass",
+      "description": {
+        "content": "Biomass APIs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4abccd62-2f43-4a67-a5dd-7c5adc3c4079",
+          "name": "Biomass data for a pen",
+          "request": {
+            "name": "Biomass data for a pen",
+            "description": {},
+            "url": {
+              "path": [
+                "biomass"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "penId",
+                  "value": "<string>",
+                  "description": "(Required) penId to query. Use \"all\" to query all pens"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "from date. Default is 7 days before toDate"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "to date (inclusive). Default is today"
+                },
+                {
+                  "disabled": false,
+                  "key": "bucketSize",
+                  "value": "<integer>",
+                  "description": "weightDist bucket size. Default 1000g"
+                },
+                {
+                  "disabled": false,
+                  "key": "nextToken",
+                  "value": "<string>",
+                  "description": "(optional) token to fetch the next batch of result"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "45213d39-ae8e-4a2f-9052-9ee34a4e3c04",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "biomass"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "penId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "bucketSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"biomass\": [\n    {\n      \"penId\": \"string\",\n      \"date\": \"1953-04-09\",\n      \"sampleSize\": 217.8841628764794,\n      \"avgWeight\": 4218.47573612126,\n      \"kFactor\": 9888.803262381369,\n      \"cv\": 3454.497168653924,\n      \"weightDist\": {\n        \"interval\": [\n          3535.7720650717706,\n          1564.1514528591372\n        ],\n        \"distribution\": [\n          2702.496289009095,\n          6207.098070601857\n        ]\n      }\n    },\n    {\n      \"penId\": \"string\",\n      \"date\": \"1997-02-08\",\n      \"sampleSize\": 4014.9087035460398,\n      \"avgWeight\": 629.3162867251345,\n      \"kFactor\": 3507.975020065656,\n      \"cv\": 5619.536154066966,\n      \"weightDist\": {\n        \"interval\": [\n          1631.4859237650637,\n          2081.3701281945405\n        ],\n        \"distribution\": [\n          7984.209058177503,\n          6605.582947050964\n        ]\n      }\n    }\n  ],\n  \"nextToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b765b024-45b1-4e61-a5ec-eba34c6609e9",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "biomass"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "penId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "bucketSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8f6ce83-ffcb-4752-bba6-b58bddaf5aa8",
+          "name": "Biomass harvest reports in the date range (by slaughter start)",
+          "request": {
+            "name": "Biomass harvest reports in the date range (by slaughter start)",
+            "description": {
+              "content": "Returns main reports. If there is no main report, returns the latest one.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "biomass",
+                "harvestReport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "penId",
+                  "value": "<string>",
+                  "description": "(Required) penId to query. Use \"all\" to query all pens"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "from date. Default is 7 days before toDate"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "to date (inclusive). Default is today"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5224b267-15c2-4034-9741-b1aca7c4a1f4",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "biomass",
+                    "harvestReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "penId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reports\": [\n    {\n      \"penId\": \"string\",\n      \"mainReport\": false,\n      \"asOfDate\": \"1980-01-31\",\n      \"lastFeedingDate\": \"1990-09-08\",\n      \"slaughterStartDate\": \"1996-12-18\",\n      \"slaughterEndDate\": \"1970-02-12\",\n      \"temperature\": 6981.427869038906,\n      \"lossFactor\": 9218.509297475845,\n      \"packingMethod\": \"string\",\n      \"fishType\": \"string\",\n      \"measurementCount\": 607,\n      \"coefficientOfVariation\": 3596.596383533182,\n      \"avgPackedWeightGrams\": 281.3379389826387,\n      \"avgRoundWeightGrams\": 4253.435410080579,\n      \"superiorRate\": 9744.908362130105,\n      \"packedWeightDistribution\": {\n        \"key_0\": 3415.332913956497,\n        \"key_1\": 5164.128762252941\n      },\n      \"roundWeightDistribution\": {\n        \"key_0\": 1409.7161015272875,\n        \"key_1\": 3969.498673566315\n      },\n      \"createdAt\": \"1986-07-04T05:53:26.246Z\"\n    },\n    {\n      \"penId\": \"string\",\n      \"mainReport\": true,\n      \"asOfDate\": \"2001-12-28\",\n      \"lastFeedingDate\": \"1985-08-03\",\n      \"slaughterStartDate\": \"1946-09-30\",\n      \"slaughterEndDate\": \"2004-09-20\",\n      \"temperature\": 9344.266119970967,\n      \"lossFactor\": 8109.589823003334,\n      \"packingMethod\": \"string\",\n      \"fishType\": \"string\",\n      \"measurementCount\": 2604,\n      \"coefficientOfVariation\": 1195.7557030063658,\n      \"avgPackedWeightGrams\": 7245.147219152443,\n      \"avgRoundWeightGrams\": 8654.185700089112,\n      \"superiorRate\": 479.43637272796934,\n      \"packedWeightDistribution\": {\n        \"key_0\": 5564.184082969318,\n        \"key_1\": 8505.613942604394\n      },\n      \"roundWeightDistribution\": {\n        \"key_0\": 2396.361811652451,\n        \"key_1\": 8246.352325357127\n      },\n      \"createdAt\": \"2007-06-25T01:29:37.470Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9d07470-69be-4667-b0f0-91052e42545a",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "biomass",
+                    "harvestReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "penId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1c959b69-8052-44a0-878e-d78f45bdbc6c",
+    "name": "Aquabyte API Documentation Biomass API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n# Aquabyte Public API\n\nTo use our API you must be issued an API key.\n\nInstructions: For all HTTPS requests you will need to pass in your API key as part of the header:\n`apikey: {API_KEY}`\n\nOur base url is https://api.aquabyte.ai/v3/\n\nRequests are limited to 1000 requests/hour\n\n\n# What's new in v3.1\n\nWith v3.1, we have added new APIs to support bulk fetching. One of the\nmain use case is for users to download Aquabyte data into their own database.\nThe new API allows us to download all pens with available data in a single call.\nFor example, to fetch biomass data for all pens, you can use the following API call:\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2026-01-01&toDate=2026-01-02\"\n```\n\nYou can switch to v3.1 API simply by changing the URL from this pattern\n`GET /pens/{penId}/biomass` to this pattern `GET /biomass?penId={penId}`. Similar\npattern is used for other data - environmental, lice, welfare and behaviour.\n\nSince v3.1 supports everything in v3.0. We recommend switching to v3.1 as soon as possible.\nv3.0 support continues during the transition.\n\n\n## Result pagination\n\nCurrently, Aquabyte Public API caps the result set up to 10,000 records.\nIf the result set has more data than the limit, they will be returned in batches.\nIn this case, the response will contain a \"nextToken\". For example:\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2025-01-01&toDate=2025-12-31\"\n\n\nIt returns\n\n{\n  \"biomass\": [\n    ... up to limit number of records ...\n  ]\n  \"nextToken\": \"(A_TOKEN)\"\n}\n```\n\nTo fetch the next batch of data, repeat the request and add the \"nextToken\" to the query parameters.\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2025-01-01&toDate=2025-12-31&nextToken=(A_TOKEN)\"\n```\n\nRepeating the request until \"nextToken\" is not present in the response.\nThis indicates that you have fetched all data.\n\n",
+      "type": "text/plain"
+    }
+  }
+}

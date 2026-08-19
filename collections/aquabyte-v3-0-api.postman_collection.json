@@ -1,0 +1,1362 @@
+{
+  "item": [
+    {
+      "id": "16149f9d-c3ee-467e-9483-26021adc66dc",
+      "name": "v3.0",
+      "description": {
+        "content": "Deprecated. Use v3.1 equivalents.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "403ce046-cd91-4da6-97d5-710b6994d1db",
+          "name": "Historical environmental data",
+          "request": {
+            "name": "Historical environmental data",
+            "description": {},
+            "url": {
+              "path": [
+                "pens",
+                ":penId",
+                "environmental"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fromTime",
+                  "value": "<dateTime>",
+                  "description": "from time. Default is 1 days ago"
+                },
+                {
+                  "disabled": false,
+                  "key": "toTime",
+                  "value": "<dateTime>",
+                  "description": "to time (exclusive). Default is today"
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "aggregation period of the metric. Default is daily"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "penId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "155e79f6-a717-4763-b8ff-6136ef72cce5",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pens",
+                    ":penId",
+                    "environmental"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "toTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "penId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"penId\": \"string\",\n      \"fromTime\": \"1995-04-12T13:35:44.235Z\",\n      \"toTime\": \"1988-01-08T22:56:54.092Z\",\n      \"temperatureAvg\": 7286.533757564842,\n      \"cameraDepthAvg\": 2866.1076451145473,\n      \"cameraDepthMin\": 9719.51314638269,\n      \"cameraDepthMax\": 2092.0051613248515,\n      \"oxygenPct\": 7849.737429510153,\n      \"salinity\": 3578.07068439164,\n      \"fishDensity\": 4740.469327437427\n    },\n    {\n      \"penId\": \"string\",\n      \"fromTime\": \"2007-02-24T19:32:11.807Z\",\n      \"toTime\": \"2024-02-09T02:50:09.183Z\",\n      \"temperatureAvg\": 5583.661541139325,\n      \"cameraDepthAvg\": 1737.85889132567,\n      \"cameraDepthMin\": 6586.185450241939,\n      \"cameraDepthMax\": 6590.303247836076,\n      \"oxygenPct\": 8956.683588427844,\n      \"salinity\": 8820.829319185157,\n      \"fishDensity\": 4715.206495640624\n    }\n  ],\n  \"penId\": \"string\",\n  \"fromTime\": \"1947-09-18T04:10:32.945Z\",\n  \"toTime\": \"1964-01-20T06:48:42.210Z\",\n  \"nextToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bef73a62-53fa-45c4-8539-96ff2b0aef39",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pens",
+                    ":penId",
+                    "environmental"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "toTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "penId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1b2d37a-09af-4b17-aaf5-f8dbd0f8a18d",
+          "name": "Latest environmental data",
+          "request": {
+            "name": "Latest environmental data",
+            "description": {},
+            "url": {
+              "path": [
+                "pens",
+                ":penId",
+                "environmental",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "penId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "11f64131-2979-4ed6-bd95-ff89935cdb27",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pens",
+                    ":penId",
+                    "environmental",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "penId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"time\": \"1966-06-18T03:24:29.476Z\",\n  \"penId\": \"string\",\n  \"temperature\": 4782.4437121697465,\n  \"cameraDepth\": 3430.137820550465,\n  \"oxygenPct\": 6537.232419618468,\n  \"salinity\": 3950.6498803667446\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "970e88e4-d1d1-44f3-8fab-70adcf9a3d8e",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pens",
+                    ":penId",
+                    "environmental",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "penId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99f51a1b-aee5-4425-8417-c8ac4c8af8dd",
+          "name": "Biomass data for a pen",
+          "request": {
+            "name": "Biomass data for a pen",
+            "description": {},
+            "url": {
+              "path": [
+                "pens",
+                ":penId",
+                "biomass"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "from date. Default is 7 days before toDate"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "to date (inclusive). Default is today"
+                },
+                {
+                  "disabled": false,
+                  "key": "bucketSize",
+                  "value": "<integer>",
+                  "description": "weightDist bucket size. Default 1000g"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "penId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3f88ffec-5e26-45bb-b1a9-294b2c5f2458",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pens",
+                    ":penId",
+                    "biomass"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "bucketSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "penId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"biomass\": [\n    {\n      \"penId\": \"string\",\n      \"date\": \"1979-02-06\",\n      \"sampleSize\": 3914.710126075257,\n      \"avgWeight\": 7288.806841889418,\n      \"kFactor\": 2978.194571841186,\n      \"cv\": 5223.681472962867,\n      \"weightDist\": {\n        \"interval\": [\n          8009.258756045409,\n          1302.9753535461775\n        ],\n        \"distribution\": [\n          7959.060333102629,\n          8258.434929973424\n        ]\n      }\n    },\n    {\n      \"penId\": \"string\",\n      \"date\": \"1990-08-29\",\n      \"sampleSize\": 4340.768174638219,\n      \"avgWeight\": 7031.382790960462,\n      \"kFactor\": 2098.5172839910515,\n      \"cv\": 655.5539981626157,\n      \"weightDist\": {\n        \"interval\": [\n          3380.8201034443987,\n          9261.280120708547\n        ],\n        \"distribution\": [\n          2549.073139300815,\n          5532.223457857376\n        ]\n      }\n    }\n  ],\n  \"nextToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55e294db-fe17-4faf-9899-8d592dd2b829",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pens",
+                    ":penId",
+                    "biomass"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "bucketSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "penId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23d32b48-c53a-4a0d-b4db-c808f27f11ea",
+          "name": "Biomass harvest reports in the date range (by slaughter start)",
+          "request": {
+            "name": "Biomass harvest reports in the date range (by slaughter start)",
+            "description": {
+              "content": "Returns main reports. If there is no main report, returns the latest one.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pens",
+                ":penId",
+                "biomass",
+                "harvestReport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "to date (inclusive). Default is today"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "penId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4179eb7a-8586-4fe1-a056-8529e76e5129",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pens",
+                    ":penId",
+                    "biomass",
+                    "harvestReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "penId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reports\": [\n    {\n      \"penId\": \"string\",\n      \"mainReport\": false,\n      \"asOfDate\": \"2014-11-13\",\n      \"lastFeedingDate\": \"1976-09-18\",\n      \"slaughterStartDate\": \"1980-10-03\",\n      \"slaughterEndDate\": \"1997-09-07\",\n      \"temperature\": 3535.382182129968,\n      \"lossFactor\": 989.1396160438915,\n      \"packingMethod\": \"string\",\n      \"fishType\": \"string\",\n      \"measurementCount\": 4724,\n      \"coefficientOfVariation\": 1891.8037748498662,\n      \"avgPackedWeightGrams\": 1323.117899563806,\n      \"avgRoundWeightGrams\": 6096.011181653548,\n      \"superiorRate\": 1578.9072281010585,\n      \"packedWeightDistribution\": {\n        \"key_0\": 5402.1159835115395,\n        \"key_1\": 2016.8888656192341,\n        \"key_2\": 1148.709776110538,\n        \"key_3\": 5175.908663648975\n      },\n      \"roundWeightDistribution\": {\n        \"key_0\": 7870.172991438992\n      },\n      \"createdAt\": \"2021-12-17T14:12:01.878Z\"\n    },\n    {\n      \"penId\": \"string\",\n      \"mainReport\": true,\n      \"asOfDate\": \"1973-04-28\",\n      \"lastFeedingDate\": \"2014-02-07\",\n      \"slaughterStartDate\": \"1986-05-23\",\n      \"slaughterEndDate\": \"1948-05-04\",\n      \"temperature\": 1869.2838384426548,\n      \"lossFactor\": 5415.9338468140095,\n      \"packingMethod\": \"string\",\n      \"fishType\": \"string\",\n      \"measurementCount\": 9408,\n      \"coefficientOfVariation\": 7476.66855285697,\n      \"avgPackedWeightGrams\": 7602.881950482979,\n      \"avgRoundWeightGrams\": 5737.827588739927,\n      \"superiorRate\": 5089.4797848329345,\n      \"packedWeightDistribution\": {\n        \"key_0\": 7154.254775758081,\n        \"key_1\": 2114.013916063859\n      },\n      \"roundWeightDistribution\": {\n        \"key_0\": 5908.9093009052995,\n        \"key_1\": 7663.245911014805,\n        \"key_2\": 9702.2477517037,\n        \"key_3\": 4048.951782287722\n      },\n      \"createdAt\": \"2019-10-26T17:17:59.950Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35b98ad0-1a55-4135-8498-3941983b9bd5",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pens",
+                    ":penId",
+                    "biomass",
+                    "harvestReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "penId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f64b268-bb88-4f82-9a89-0685eff53f28",
+          "name": "Lice count for one or more pens",
+          "request": {
+            "name": "Lice count for one or more pens",
+            "description": {},
+            "url": {
+              "path": [
+                "pens",
+                ":penId",
+                "liceCount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "from date. Default is 7 days before toDate"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "to date (inclusive). Default is today"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "penId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fdfe38c9-b626-4a03-a7b3-f067f62f880b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pens",
+                    ":penId",
+                    "liceCount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "penId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"liceCount\": [\n    {\n      \"penId\": \"string\",\n      \"date\": \"2003-10-03\",\n      \"sampleSize\": 6866.983040201201,\n      \"adultFemale\": 4986.403646448872,\n      \"adultFemaleConverted\": 8638.581109940687,\n      \"mobile\": 100.6262013216197,\n      \"mobileConverted\": 776.6995367161578,\n      \"caligus\": 1021.8181758421163\n    },\n    {\n      \"penId\": \"string\",\n      \"date\": \"1985-01-13\",\n      \"sampleSize\": 1079.6667029894847,\n      \"adultFemale\": 3971.655683233516,\n      \"adultFemaleConverted\": 3522.709889426452,\n      \"mobile\": 8234.370271290029,\n      \"mobileConverted\": 3461.9853062011675,\n      \"caligus\": 383.3419899817947\n    }\n  ],\n  \"nextToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29675673-8191-49ef-b613-6e8946f25191",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pens",
+                    ":penId",
+                    "liceCount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "penId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67b31639-e2b9-47d2-ad22-76453df5ba2e",
+          "name": "Swim speed and swim tilt for a pen",
+          "request": {
+            "name": "Swim speed and swim tilt for a pen",
+            "description": {},
+            "url": {
+              "path": [
+                "pens",
+                ":penId",
+                "behavior",
+                "swimSpeed"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fromTime",
+                  "value": "<dateTime>",
+                  "description": "from time. Default is 7 days before toTime"
+                },
+                {
+                  "disabled": false,
+                  "key": "toTime",
+                  "value": "<dateTime>",
+                  "description": "to time (exclusive). Default is today"
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "period of the metric. Default is daily"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "penId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ceaaeeda-0553-49eb-b4d8-f324f7651736",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pens",
+                    ":penId",
+                    "behavior",
+                    "swimSpeed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "toTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "penId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"swimSpeed\": [\n    {\n      \"penId\": \"string\",\n      \"fromTime\": \"1972-01-27T01:44:44.763Z\",\n      \"toTime\": \"1969-03-13T17:45:24.371Z\",\n      \"swimSpeedsampleSize\": 4597.032082420855,\n      \"swimSpeed\": 2683.6331031945215,\n      \"swimTiltsampleSize\": 3997.1738391609656,\n      \"swimTilt\": 7520.489946068208\n    },\n    {\n      \"penId\": \"string\",\n      \"fromTime\": \"1968-12-27T16:26:37.924Z\",\n      \"toTime\": \"1991-10-21T08:45:05.894Z\",\n      \"swimSpeedsampleSize\": 7775.694735850994,\n      \"swimSpeed\": 4270.798843479408,\n      \"swimTiltsampleSize\": 7385.494707968213,\n      \"swimTilt\": 9524.983803920279\n    }\n  ],\n  \"nextToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76ab9cdc-35ff-41e3-aa92-362ab58639d6",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pens",
+                    ":penId",
+                    "behavior",
+                    "swimSpeed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "toTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "penId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62a4b150-079b-475a-87b6-31cd173df4c6",
+          "name": "Breathing index for a pen",
+          "request": {
+            "name": "Breathing index for a pen",
+            "description": {},
+            "url": {
+              "path": [
+                "pens",
+                ":penId",
+                "behavior",
+                "breathingIndex"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fromTime",
+                  "value": "<dateTime>",
+                  "description": "from time. Default is 7 days before toTime"
+                },
+                {
+                  "disabled": false,
+                  "key": "toTime",
+                  "value": "<dateTime>",
+                  "description": "to time (exclusive). Default is today"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "penId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4df3eb26-c1d4-478e-98ca-fa3fea9a2248",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pens",
+                    ":penId",
+                    "behavior",
+                    "breathingIndex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "toTime",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "penId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"breathingIndex\": [\n    {\n      \"penId\": \"string\",\n      \"fromTime\": \"1999-01-23T20:34:48.782Z\",\n      \"toTime\": \"1967-11-05T11:39:07.016Z\",\n      \"sampleSize\": 4700.805949605664,\n      \"breathingIndex\": 9821.937307549722\n    },\n    {\n      \"penId\": \"string\",\n      \"fromTime\": \"1997-10-12T09:11:37.852Z\",\n      \"toTime\": \"1991-09-14T11:37:10.853Z\",\n      \"sampleSize\": 7105.02025089011,\n      \"breathingIndex\": 7820.5656854372655\n    }\n  ],\n  \"nextToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abfccfcc-5f7f-4eb1-8584-2bd0058a1511",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pens",
+                    ":penId",
+                    "behavior",
+                    "breathingIndex"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "toTime",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "penId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1983a4ae-b57c-4fb0-bba8-d3988aa1f5ed",
+          "name": "Welfare scores for one or more pens",
+          "request": {
+            "name": "Welfare scores for one or more pens",
+            "description": {},
+            "url": {
+              "path": [
+                "pens",
+                ":penId",
+                "welfareScores"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "from date. Default is 7 days before toDate"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "to date (inclusive). Default is today"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "penId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a2573820-6805-4b8d-a57c-9b1e974a8bc4",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pens",
+                    ":penId",
+                    "welfareScores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "penId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"welfareScores\": [\n    {\n      \"penId\": \"string\",\n      \"date\": \"1972-09-21\",\n      \"welfareScores\": {\n        \"bodyWound\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 2896.9874705139364,\n          \"sampleSize\": 6926.374142857139,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scaleLoss\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 807.9723903378899,\n          \"sampleSize\": 5361.62925975873,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"snoutWound\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 5999.521971724975,\n          \"sampleSize\": 1506.6818367154056,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"maturation\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 3758.4631815370726,\n          \"sampleSize\": 5479.107855304995,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"eyeBleeding\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 4194.818295873105,\n          \"sampleSize\": 807.3360362519244,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"eyeClouding\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 548.2968281895562,\n          \"sampleSize\": 4980.022659882773,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"exophthalmos\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 892.035705389328,\n          \"sampleSize\": 7674.565123696378,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"opercularDamage\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 4407.761065647767,\n          \"sampleSize\": 2005.4058880908676,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"backDeformity\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 9279.181231796681,\n          \"sampleSize\": 9840.20490598395,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"pelvicFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 9452.031689161453,\n          \"sampleSize\": 2547.3757194360337,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"pectoralFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 9234.148742852327,\n          \"sampleSize\": 9458.917299353125,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"caudalFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 9412.794667483571,\n          \"sampleSize\": 5694.79213486205,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"analFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 6973.938726390765,\n          \"sampleSize\": 6469.388985625211,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dorsalFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 1657.7619411250598,\n          \"sampleSize\": 176.01020109884624,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"upperJawDeformity\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 521.5345262342153,\n          \"sampleSize\": 5489.553981497346,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"lowerJawDeformity\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 9658.720337552473,\n          \"sampleSize\": 4741.162816143849,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"mechHeadWound\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 6655.04066818477,\n          \"sampleSize\": 1631.4910325756493,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"penId\": \"string\",\n      \"date\": \"2008-08-17\",\n      \"welfareScores\": {\n        \"bodyWound\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 4097.904125621701,\n          \"sampleSize\": 119.72221455507915,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scaleLoss\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 1067.4254173264742,\n          \"sampleSize\": 5910.107139340245,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"snoutWound\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 7186.8170329433115,\n          \"sampleSize\": 2512.2577491705565,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"maturation\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 9369.295291819735,\n          \"sampleSize\": 2343.930209487933,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"eyeBleeding\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 5729.014911427948,\n          \"sampleSize\": 8936.323570689428,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"eyeClouding\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 5106.167670720041,\n          \"sampleSize\": 5965.406704061697,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"exophthalmos\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 4297.29386175695,\n          \"sampleSize\": 8084.247438279353,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"opercularDamage\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 2587.0187872147144,\n          \"sampleSize\": 6898.085381743817,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"backDeformity\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 5166.977901188131,\n          \"sampleSize\": 3801.2696886093254,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"pelvicFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 7151.838105303144,\n          \"sampleSize\": 8949.122191431066,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"pectoralFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 5092.80560905406,\n          \"sampleSize\": 9868.132530144103,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"caudalFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 4559.47804759602,\n          \"sampleSize\": 130.1686666148616,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"analFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 8318.644615923267,\n          \"sampleSize\": 5552.446648147117,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dorsalFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 6440.482556283135,\n          \"sampleSize\": 7748.228914923585,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"upperJawDeformity\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 4291.820622158674,\n          \"sampleSize\": 2747.1377553676257,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"lowerJawDeformity\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 7017.526568644645,\n          \"sampleSize\": 6074.396310132616,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"mechHeadWound\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 6361.651308193652,\n          \"sampleSize\": 3090.326177703628,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ],\n  \"nextToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1332619b-e18f-42ba-8405-39a28daf21ef",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pens",
+                    ":penId",
+                    "welfareScores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "penId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a517a4a1-5e7d-433b-8621-84854a1d0fc2",
+    "name": "Aquabyte API Documentation V3.0 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n# Aquabyte Public API\n\nTo use our API you must be issued an API key.\n\nInstructions: For all HTTPS requests you will need to pass in your API key as part of the header:\n`apikey: {API_KEY}`\n\nOur base url is https://api.aquabyte.ai/v3/\n\nRequests are limited to 1000 requests/hour\n\n\n# What's new in v3.1\n\nWith v3.1, we have added new APIs to support bulk fetching. One of the\nmain use case is for users to download Aquabyte data into their own database.\nThe new API allows us to download all pens with available data in a single call.\nFor example, to fetch biomass data for all pens, you can use the following API call:\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2026-01-01&toDate=2026-01-02\"\n```\n\nYou can switch to v3.1 API simply by changing the URL from this pattern\n`GET /pens/{penId}/biomass` to this pattern `GET /biomass?penId={penId}`. Similar\npattern is used for other data - environmental, lice, welfare and behaviour.\n\nSince v3.1 supports everything in v3.0. We recommend switching to v3.1 as soon as possible.\nv3.0 support continues during the transition.\n\n\n## Result pagination\n\nCurrently, Aquabyte Public API caps the result set up to 10,000 records.\nIf the result set has more data than the limit, they will be returned in batches.\nIn this case, the response will contain a \"nextToken\". For example:\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2025-01-01&toDate=2025-12-31\"\n\n\nIt returns\n\n{\n  \"biomass\": [\n    ... up to limit number of records ...\n  ]\n  \"nextToken\": \"(A_TOKEN)\"\n}\n```\n\nTo fetch the next batch of data, repeat the request and add the \"nextToken\" to the query parameters.\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2025-01-01&toDate=2025-12-31&nextToken=(A_TOKEN)\"\n```\n\nRepeating the request until \"nextToken\" is not present in the response.\nThis indicates that you have fetched all data.\n\n",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "provider": "aquabyte",
+  "sources": [
+    "aquabyte-behaviour-api-openapi.yml",
+    "aquabyte-biomass-api-openapi.yml",
+    "aquabyte-environmental-api-openapi.yml",
+    "aquabyte-lice-api-openapi.yml",
+    "aquabyte-sites-api-openapi.yml",
+    "aquabyte-v3-0-api-openapi.yml",
+    "aquabyte-welfare-api-openapi.yml"
+  ],
+  "outputs": [
+    "aquabyte-behaviour-api-openapi.yml",
+    "aquabyte-biomass-api-openapi.yml",
+    "aquabyte-environmental-api-openapi.yml",
+    "aquabyte-lice-api-openapi.yml",
+    "aquabyte-sites-api-openapi.yml",
+    "aquabyte-v3-0-api-openapi.yml",
+    "aquabyte-welfare-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "aquabyte-behaviour-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "aquabyte-biomass-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "aquabyte-environmental-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "aquabyte-lice-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "aquabyte-sites-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "aquabyte-v3-0-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "aquabyte-welfare-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}

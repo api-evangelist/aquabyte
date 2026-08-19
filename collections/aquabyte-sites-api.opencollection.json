@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Aquabyte API Documentation Sites API",
+    "version": "v3.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sites",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all sites and pens details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/sites"
+          },
+          "docs": "Retrieve all available sites and pens in each site"
+        },
+        {
+          "info": {
+            "name": "Retrieve site and pens details of {siteId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/sites/:siteId",
+            "params": [
+              {
+                "name": "siteId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve all available sites and pens in each site"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

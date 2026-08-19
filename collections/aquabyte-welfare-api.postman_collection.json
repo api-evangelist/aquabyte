@@ -1,0 +1,369 @@
+{
+  "item": [
+    {
+      "id": "32587a53-1dce-44c0-abfe-fc57d5dbb42f",
+      "name": "welfare",
+      "description": {
+        "content": "Welfare APIs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dfdeddc1-7b08-4250-8cb2-0a509b01f6d8",
+          "name": "Welfare scores for one or more pens",
+          "request": {
+            "name": "Welfare scores for one or more pens",
+            "description": {},
+            "url": {
+              "path": [
+                "welfareScores"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "penId",
+                  "value": "<string>",
+                  "description": "(Required) penId to query. Use \"all\" to query all pens"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "from date. Default is 7 days before toDate"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "to date (inclusive). Default is today"
+                },
+                {
+                  "disabled": false,
+                  "key": "nextToken",
+                  "value": "<string>",
+                  "description": "(optional) token to fetch the next batch of result"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9a9ab9c5-7a42-4d53-a3b7-34548d9ec96e",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "welfareScores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "penId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"welfareScores\": [\n    {\n      \"penId\": \"string\",\n      \"date\": \"1970-01-09\",\n      \"welfareScores\": {\n        \"bodyWound\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 1297.7240961154434,\n          \"sampleSize\": 3230.8056006711604,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scaleLoss\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 4416.0516770684635,\n          \"sampleSize\": 3336.589764052718,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"snoutWound\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 8567.511374201225,\n          \"sampleSize\": 2559.3649233552596,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"maturation\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 6602.260814257157,\n          \"sampleSize\": 5878.481131839359,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"eyeBleeding\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 3144.7044949568926,\n          \"sampleSize\": 3433.282821840481,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"eyeClouding\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 9834.945782093559,\n          \"sampleSize\": 3232.7666240335207,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"exophthalmos\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 7694.885332984469,\n          \"sampleSize\": 9381.61590699877,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"opercularDamage\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 3538.290591810871,\n          \"sampleSize\": 1317.5310002611263,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"backDeformity\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 2671.034638661215,\n          \"sampleSize\": 6367.612015001803,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"pelvicFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 8032.3236060632335,\n          \"sampleSize\": 7.446952714813548,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"pectoralFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 761.3802196497498,\n          \"sampleSize\": 6623.013477619014,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"caudalFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 6491.475932250811,\n          \"sampleSize\": 2912.5803254692673,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"analFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 8631.877061959256,\n          \"sampleSize\": 3363.435540131,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dorsalFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 4405.90408022837,\n          \"sampleSize\": 6776.6400251696905,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"upperJawDeformity\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 7376.4125159208215,\n          \"sampleSize\": 1174.5060835569932,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"lowerJawDeformity\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 6565.4919617105,\n          \"sampleSize\": 7638.541663560057,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"mechHeadWound\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 3199.177392464404,\n          \"sampleSize\": 1077.0657385301574,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"penId\": \"string\",\n      \"date\": \"1979-02-01\",\n      \"welfareScores\": {\n        \"bodyWound\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 1227.6497524822305,\n          \"sampleSize\": 6531.454639739102,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scaleLoss\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 2854.6165975732406,\n          \"sampleSize\": 7021.197641897423,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"snoutWound\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 5793.191662383225,\n          \"sampleSize\": 1318.3472912681204,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"maturation\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 2514.0781331009043,\n          \"sampleSize\": 1512.7915842927875,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"eyeBleeding\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 14.948420513375416,\n          \"sampleSize\": 4245.546343616195,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"eyeClouding\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 5368.709601275847,\n          \"sampleSize\": 7326.546831239548,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"exophthalmos\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 8135.739413303805,\n          \"sampleSize\": 9393.004227901158,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"opercularDamage\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 9110.818960911372,\n          \"sampleSize\": 316.02418327199786,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"backDeformity\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 8913.999649378986,\n          \"sampleSize\": 7038.920830036922,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"pelvicFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 9341.490358214982,\n          \"sampleSize\": 7635.965043701256,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"pectoralFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 588.8076815369625,\n          \"sampleSize\": 2086.409371948531,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"caudalFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 1158.0749792296997,\n          \"sampleSize\": 4107.6877381964005,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"analFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 1774.74665108722,\n          \"sampleSize\": 1220.6206930177466,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dorsalFin\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 363.1523113784518,\n          \"sampleSize\": 2771.189436263857,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"upperJawDeformity\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 1138.4116506776998,\n          \"sampleSize\": 692.3643041729799,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"lowerJawDeformity\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 5633.322873777421,\n          \"sampleSize\": 471.3330735022747,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"mechHeadWound\": {\n          \"active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nothing\": 8554.038718973407,\n          \"sampleSize\": 268.94749213448364,\n          \"healed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ],\n  \"nextToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d998bda-622a-49d3-a920-36ba8953aa52",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "welfareScores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "penId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d10fa883-2cd5-4505-91bf-e594ac4366af",
+          "name": "(Experimental API) Superior rate for a pen. Note: this is a preview version of superior rate API. The details are subject to change. ",
+          "request": {
+            "name": "(Experimental API) Superior rate for a pen. Note: this is a preview version of superior rate API. The details are subject to change. ",
+            "description": {},
+            "url": {
+              "path": [
+                "superiorRate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "penId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "fromDate",
+                  "value": "<date>",
+                  "description": "from date. Default is 7 days before toDate"
+                },
+                {
+                  "disabled": false,
+                  "key": "toDate",
+                  "value": "<date>",
+                  "description": "to date (inclusive). Default is today"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bodyWound\": {\n    \"active\": {\n      \"score1\": 0,\n      \"score2\": 0,\n      \"score3\": 0\n    },\n    \"healed\": {\n      \"score1\": 0,\n      \"score2\": 0,\n      \"score3\": 0\n    }\n  },\n  \"scaleLoss\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"snoutWound\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"maturation\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"eyeBleeding\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"eyeClouding\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"exophthalmos\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"opercularDamage\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"backDeformity\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"pelvicFin\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"pectoralFin\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"caudalFin\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"analFin\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"dorsalFin\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"upperJawDeformity\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"lowerJawDeformity\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"breathingMouth\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2fe5b172-6a9b-4dd9-8805-566cec0b5bff",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "superiorRate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "penId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bodyWound\": {\n    \"active\": {\n      \"score1\": 0,\n      \"score2\": 0,\n      \"score3\": 0\n    },\n    \"healed\": {\n      \"score1\": 0,\n      \"score2\": 0,\n      \"score3\": 0\n    }\n  },\n  \"scaleLoss\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"snoutWound\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"maturation\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"eyeBleeding\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"eyeClouding\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"exophthalmos\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"opercularDamage\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"backDeformity\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"pelvicFin\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"pectoralFin\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"caudalFin\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"analFin\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"dorsalFin\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"upperJawDeformity\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"lowerJawDeformity\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"breathingMouth\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"superiorRate\": [\n    {\n      \"penId\": \"string\",\n      \"date\": \"2014-05-04\",\n      \"superiorRate\": 6491.585281708738,\n      \"dataQuality\": \"\"\n    },\n    {\n      \"penId\": \"string\",\n      \"date\": \"2006-12-07\",\n      \"superiorRate\": 4045.133358580797,\n      \"dataQuality\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5c19846-9dc8-48e6-8df5-5e5800af72be",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "superiorRate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "penId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bodyWound\": {\n    \"active\": {\n      \"score1\": 0,\n      \"score2\": 0,\n      \"score3\": 0\n    },\n    \"healed\": {\n      \"score1\": 0,\n      \"score2\": 0,\n      \"score3\": 0\n    }\n  },\n  \"scaleLoss\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"snoutWound\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"maturation\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"eyeBleeding\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"eyeClouding\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"exophthalmos\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"opercularDamage\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"backDeformity\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"pelvicFin\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"pectoralFin\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"caudalFin\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"analFin\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"dorsalFin\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"upperJawDeformity\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"lowerJawDeformity\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  },\n  \"breathingMouth\": {\n    \"score1\": 0,\n    \"score2\": 0,\n    \"score3\": 0\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e7609774-0cc5-4f6d-9640-1c7d77489c16",
+    "name": "Aquabyte API Documentation Welfare API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n# Aquabyte Public API\n\nTo use our API you must be issued an API key.\n\nInstructions: For all HTTPS requests you will need to pass in your API key as part of the header:\n`apikey: {API_KEY}`\n\nOur base url is https://api.aquabyte.ai/v3/\n\nRequests are limited to 1000 requests/hour\n\n\n# What's new in v3.1\n\nWith v3.1, we have added new APIs to support bulk fetching. One of the\nmain use case is for users to download Aquabyte data into their own database.\nThe new API allows us to download all pens with available data in a single call.\nFor example, to fetch biomass data for all pens, you can use the following API call:\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2026-01-01&toDate=2026-01-02\"\n```\n\nYou can switch to v3.1 API simply by changing the URL from this pattern\n`GET /pens/{penId}/biomass` to this pattern `GET /biomass?penId={penId}`. Similar\npattern is used for other data - environmental, lice, welfare and behaviour.\n\nSince v3.1 supports everything in v3.0. We recommend switching to v3.1 as soon as possible.\nv3.0 support continues during the transition.\n\n\n## Result pagination\n\nCurrently, Aquabyte Public API caps the result set up to 10,000 records.\nIf the result set has more data than the limit, they will be returned in batches.\nIn this case, the response will contain a \"nextToken\". For example:\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2025-01-01&toDate=2025-12-31\"\n\n\nIt returns\n\n{\n  \"biomass\": [\n    ... up to limit number of records ...\n  ]\n  \"nextToken\": \"(A_TOKEN)\"\n}\n```\n\nTo fetch the next batch of data, repeat the request and add the \"nextToken\" to the query parameters.\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2025-01-01&toDate=2025-12-31&nextToken=(A_TOKEN)\"\n```\n\nRepeating the request until \"nextToken\" is not present in the response.\nThis indicates that you have fetched all data.\n\n",
+      "type": "text/plain"
+    }
+  }
+}

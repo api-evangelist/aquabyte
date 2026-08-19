@@ -1,0 +1,149 @@
+openapi: 3.2.0
+info:
+  title: Aquabyte API Documentation Sites API
+  description: "\n# Aquabyte Public API\n\nTo use our API you must be issued an API key.\n\nInstructions: For all HTTPS requests you will need to pass in your API key as part of the header:\n`apikey: {API_KEY}`\n\nOur base url is https://api.aquabyte.ai/v3/\n\nRequests are limited to 1000 requests/hour\n\n\n# What's new in v3.1\n\nWith v3.1, we have added new APIs to support bulk fetching. One of the\nmain use case is for users to download Aquabyte data into their own database.\nThe new API allows us to download all pens with available data in a single call.\nFor example, to fetch biomass data for all pens, you can use the following API call:\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2026-01-01&toDate=2026-01-02\"\n```\n\nYou can switch to v3.1 API simply by changing the URL from this pattern\n`GET /pens/{penId}/biomass` to this pattern `GET /biomass?penId={penId}`. Similar\npattern is used for other data - environmental, lice, welfare and behaviour.\n\nSince v3.1 supports everything in v3.0. We recommend switching to v3.1 as soon as possible.\nv3.0 support continues during the transition.\n\n\n## Result pagination\n\nCurrently, Aquabyte Public API caps the result set up to 10,000 records.\nIf the result set has more data than the limit, they will be returned in batches.\nIn this case, the response will contain a \"nextToken\". For example:\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2025-01-01&toDate=2025-12-31\"\n\n\nIt returns\n\n{\n  \"biomass\": [\n    ... up to limit number of records ...\n  ]\n  \"nextToken\": \"(A_TOKEN)\"\n}\n```\n\nTo fetch the next batch of data, repeat the request and add the \"nextToken\" to the query parameters.\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2025-01-01&toDate=2025-12-31&nextToken=(A_TOKEN)\"\n```\n\nRepeating the request until \"nextToken\" is not present in the response.\nThis indicates that you have fetched all data.\n\n"
+  version: v3.1
+servers:
+- url: /v3
+- url: https://api.aquabyte.ai/v3
+  description: Aquabyte API Server
+tags:
+- name: Sites
+paths:
+  /sites:
+    get:
+      summary: Retrieve all sites and pens details
+      description: Retrieve all available sites and pens in each site
+      operationId: get_sites_sites_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SitesResponse'
+      tags:
+      - Sites
+  /sites/{siteId}:
+    get:
+      summary: Retrieve site and pens details of {siteId}
+      description: Retrieve all available sites and pens in each site
+      operationId: get_sites_siteId_sites__siteId__get
+      parameters:
+      - name: siteId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SitesResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Sites
+components:
+  schemas:
+    SitesResponse:
+      properties:
+        sites:
+          items:
+            $ref: '#/components/schemas/Site'
+          type: array
+      type: object
+      required:
+      - sites
+      title: SitesResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input: {}
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+      type: object
+      title: HTTPValidationError
+    Site:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        governmentSiteNumber:
+          anyOf:
+          - type: integer
+          - type: 'null'
+        external_site_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Site Id
+          description: The corresponding site id from data integration
+        pens:
+          items:
+            $ref: '#/components/schemas/Pen'
+          type: array
+      type: object
+      required:
+      - id
+      - name
+      - governmentSiteNumber
+      - pens
+      title: Site
+    Pen:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        penCode:
+          anyOf:
+          - type: string
+          - type: 'null'
+        isActive:
+          type: boolean
+        external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+          description: The corresponding id from data integration
+      type: object
+      required:
+      - id
+      - name
+      - penCode
+      - isActive
+      title: Pen
