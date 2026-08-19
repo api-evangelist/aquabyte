@@ -15,7 +15,7 @@ x-type: company
 x-source: harvest:secondary-market
 x-tier: profiled
 x-tier-reason: openapi-harvested
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-06'
 modified: '2026-08-06'
 image: https://www.aquabyte.ai/en/icon-illyi6.png
