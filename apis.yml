@@ -22,6 +22,19 @@ image: https://www.aquabyte.ai/en/icon-illyi6.png
 tags:
 - Aquaculture
 - Fish Farming
+- Computer-Vision
+- Machine-Learning
+- Biomass Estimation
+- Sea Lice
+- Fish Welfare
+- Environmental Monitoring
+- Agriculture Technology
+- Norway
+- Salmon
+- Data
+tags_raw:
+- Aquaculture
+- Fish Farming
 - Computer Vision
 - Machine Learning
 - Biomass Estimation
@@ -71,6 +84,8 @@ apis:
   humanURL: https://api.aquabyte.ai/v3/docs
   baseURL: https://api.aquabyte.ai/v3
   tags:
+  - Biomass
+  tags_raw:
   - biomass
   properties:
   - type: OpenAPI
@@ -198,7 +213,8 @@ apis:
   description: Deprecated. Use v3.1 equivalents.
   humanURL: https://api.aquabyte.ai/v3/docs
   baseURL: https://api.aquabyte.ai/v3
-  tags:
+  tags: []
+  tags_raw:
   - v3.0
   properties:
   - type: OpenAPI
