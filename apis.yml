@@ -15,6 +15,18 @@ x-type: company
 x-source: harvest:secondary-market
 x-tier: profiled
 x-tier-reason: openapi-harvested
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 specificationVersion: '0.23'
 created: '2026-08-06'
 modified: '2026-08-06'
