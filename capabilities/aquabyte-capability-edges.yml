@@ -1,0 +1,66 @@
+slug: aquabyte
+provider: Aquabyte
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Agriculture & Food Production
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: lice
+  spec_file: aquabyte-lice-api-openapi.yml
+  capability_id: BC-3520.40
+  capability_id_l1: BC-3520
+  capability_name: Aquatic Animal Health Management
+  confidence: 0.85
+  evidence: GET /liceCount 'Lice count for one or more pens'; schema LiceCount
+  reason: Sea-lice counting per pen is parasite surveillance for farmed salmon, squarely Aquatic Animal
+    Health Management (disease/parasite surveillance).
+- tag: Environmental
+  spec_file: aquabyte-environmental-api-openapi.yml
+  capability_id: BC-3520.30
+  capability_id_l1: BC-3520
+  capability_name: Water Quality Management
+  confidence: 0.8
+  evidence: GET /environmental 'Historical environmental data'; GET /environmental/latest 'Latest environmental
+    data'; schemas EnvironmentalDataPoint, EnvironmentalDataLive (per pen)
+  reason: Environmental readings per salmon pen on an aquaculture platform are the water-quality/environment
+    monitoring surface of grow-out sites, matching Water Quality Management. Slight residual ambiguity
+    over whether some parameters are site-environment rather than strictly water quality.
+- tag: v3.0
+  spec_file: aquabyte-v3-0-api-openapi.yml
+  capability_id: BC-3520
+  capability_id_l1: BC-3520
+  capability_name: Aquaculture Operations Management
+  confidence: 0.75
+  evidence: GET /pens/{penId}/biomass, /pens/{penId}/liceCount, /pens/{penId}/environmental, /pens/{penId}/welfareScores
+  reason: Deprecated v3.0 tag bundles the same per-pen aquaculture production data (biomass, lice, environmental,
+    welfare), so it realises aquaculture operations broadly; no single sub-capability fits the whole bundle.
+- tag: biomass
+  spec_file: aquabyte-biomass-api-openapi.yml
+  capability_id: BC-3520
+  capability_id_l1: BC-3520
+  capability_name: Aquaculture Operations Management
+  confidence: 0.72
+  evidence: GET /biomass 'Biomass data for a pen'; GET /biomass/harvestReport 'Biomass harvest reports
+    in the date range (by slaughter start)'; schemas BiomassDailyModel, WeightDistModel
+  reason: Biomass and weight-distribution estimation per pen plus harvest reporting is core farmed-aquatic-species
+    production tracking. Left at L1 because it spans growth tracking and harvest reporting rather than
+    one sub-capability.
+- tag: welfare
+  spec_file: aquabyte-welfare-api-openapi.yml
+  capability_id: BC-3520
+  capability_id_l1: BC-3520
+  capability_name: Aquaculture Operations Management
+  confidence: 0.7
+  evidence: GET /welfareScores 'Welfare scores for one or more pens'; POST /superiorRate '(Experimental
+    API) Superior rate for a pen'; schemas WelfareScoresRecord, DowngradeScores
+  reason: Welfare scoring and superior/downgrade rate estimation for farmed salmon pens is aquaculture
+    stock condition management. Held at L1 because the candidate list has no aquaculture welfare sub-capability
+    and the downgrade/superior-rate element also touches harvest quality.

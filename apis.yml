@@ -291,6 +291,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/aquabyte-capability-edges.yml
+  name: Aquabyte Business Capability Map
 - type: AgentSkill
   url: skills/aquabyte-harvest-planning.md
 - type: Overlay
