@@ -96,7 +96,7 @@ apis:
   humanURL: https://api.aquabyte.ai/v3/docs
   baseURL: https://api.aquabyte.ai/v3
   tags:
-  - biomass
+  - Biomass
   tags_raw:
   - biomass
   properties:
