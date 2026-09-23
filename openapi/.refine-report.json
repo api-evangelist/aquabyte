@@ -1,20 +1,14 @@
 {
   "provider": "aquabyte",
   "sources": [
-    "aquabyte-behaviour-api-openapi.yml",
-    "aquabyte-biomass-api-openapi.yml",
-    "aquabyte-environmental-api-openapi.yml",
-    "aquabyte-lice-api-openapi.yml",
-    "aquabyte-sites-api-openapi.yml",
-    "aquabyte-v3-0-api-openapi.yml",
-    "aquabyte-welfare-api-openapi.yml"
+    "_original/aquabyte-data-api-openapi-original.json"
   ],
   "outputs": [
+    "aquabyte-environmental-api-openapi.yml",
+    "aquabyte-sites-api-openapi.yml",
     "aquabyte-behaviour-api-openapi.yml",
     "aquabyte-biomass-api-openapi.yml",
-    "aquabyte-environmental-api-openapi.yml",
     "aquabyte-lice-api-openapi.yml",
-    "aquabyte-sites-api-openapi.yml",
     "aquabyte-v3-0-api-openapi.yml",
     "aquabyte-welfare-api-openapi.yml"
   ],
@@ -22,14 +16,25 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "aquabyte-behaviour-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "aquabyte-biomass-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "aquabyte-environmental-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "aquabyte-lice-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "aquabyte-sites-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "aquabyte-v3-0-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "aquabyte-welfare-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "aquabyte-data-api-openapi-original.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "aquabyte-data-api-openapi-original.json: tagged paths GET /sites -> Sites",
+    "aquabyte-data-api-openapi-original.json: tagged paths GET /sites/{siteId} -> Sites",
+    "aquabyte-data-api-openapi-original.json: tagged paths GET /environmental -> Environmental",
+    "aquabyte-data-api-openapi-original.json: tagged paths GET /environmental/latest -> Environmental",
+    "aquabyte-data-api-openapi-original.json: declared missing tag: Environmental",
+    "aquabyte-data-api-openapi-original.json: declared missing tag: Sites",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "_original/aquabyte-data-api-openapi.yml: archived document superseded by a larger archived document",
+    "aquabyte-behaviour-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aquabyte-biomass-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aquabyte-environmental-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aquabyte-lice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aquabyte-sites-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aquabyte-v3-0-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aquabyte-welfare-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

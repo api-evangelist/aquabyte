@@ -1,20 +1,23 @@
 openapi: 3.2.0
 info:
   title: Aquabyte API Documentation V3.0 API
-  description: "\n# Aquabyte Public API\n\nTo use our API you must be issued an API key.\n\nInstructions: For all HTTPS requests you will need to pass in your API key as part of the header:\n`apikey: {API_KEY}`\n\nOur base url is https://api.aquabyte.ai/v3/\n\nRequests are limited to 1000 requests/hour\n\n\n# What's new in v3.1\n\nWith v3.1, we have added new APIs to support bulk fetching. One of the\nmain use case is for users to download Aquabyte data into their own database.\nThe new API allows us to download all pens with available data in a single call.\nFor example, to fetch biomass data for all pens, you can use the following API call:\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2026-01-01&toDate=2026-01-02\"\n```\n\nYou can switch to v3.1 API simply by changing the URL from this pattern\n`GET /pens/{penId}/biomass` to this pattern `GET /biomass?penId={penId}`. Similar\npattern is used for other data - environmental, lice, welfare and behaviour.\n\nSince v3.1 supports everything in v3.0. We recommend switching to v3.1 as soon as possible.\nv3.0 support continues during the transition.\n\n\n## Result pagination\n\nCurrently, Aquabyte Public API caps the result set up to 10,000 records.\nIf the result set has more data than the limit, they will be returned in batches.\nIn this case, the response will contain a \"nextToken\". For example:\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2025-01-01&toDate=2025-12-31\"\n\n\nIt returns\n\n{\n  \"biomass\": [\n    ... up to limit number of records ...\n  ]\n  \"nextToken\": \"(A_TOKEN)\"\n}\n```\n\nTo fetch the next batch of data, repeat the request and add the \"nextToken\" to the query parameters.\n\n```\nGET \"https://api.aquabyte.ai/v3/biomass?penId=all&fromDate=2025-01-01&toDate=2025-12-31&nextToken=(A_TOKEN)\"\n```\n\nRepeating the request until \"nextToken\" is not present in the response.\nThis indicates that you have fetched all data.\n\n"
+  description: '# Aquabyte Public API
+
+
+    To use our API you must be issued an API key.'
   version: v3.1
 servers:
 - url: /v3
 - url: https://api.aquabyte.ai/v3
   description: Aquabyte API Server
 tags:
-- name: v3.0
+- name: V3 0
   description: Deprecated. Use v3.1 equivalents.
 paths:
   /pens/{penId}/environmental:
     get:
       tags:
-      - v3.0
+      - V3 0
       summary: Historical environmental data
       operationId: get_environmental_deprecated_pens__penId__environmental_get
       deprecated: true
@@ -70,7 +73,7 @@ paths:
   /pens/{penId}/environmental/latest:
     get:
       tags:
-      - v3.0
+      - V3 0
       summary: Latest environmental data
       operationId: get_environmental_latest_pens__penId__environmental_latest_get
       deprecated: true
@@ -96,7 +99,7 @@ paths:
   /pens/{penId}/biomass:
     get:
       tags:
-      - v3.0
+      - V3 0
       summary: Biomass data for a pen
       operationId: get_biomass_daily_deprecated_pens__penId__biomass_get
       deprecated: true
@@ -152,7 +155,7 @@ paths:
   /pens/{penId}/biomass/harvestReport:
     get:
       tags:
-      - v3.0
+      - V3 0
       summary: Biomass harvest reports in the date range (by slaughter start)
       description: Returns main reports. If there is no main report, returns the latest one.
       operationId: get_biomass_harvest_report_deprecated_pens__penId__biomass_harvestReport_get
@@ -195,7 +198,7 @@ paths:
   /pens/{penId}/liceCount:
     get:
       tags:
-      - v3.0
+      - V3 0
       summary: Lice count for one or more pens
       operationId: get_pen_lice_count_deprecated_pens__penId__liceCount_get
       deprecated: true
@@ -241,7 +244,7 @@ paths:
   /pens/{penId}/behavior/swimSpeed:
     get:
       tags:
-      - v3.0
+      - V3 0
       summary: Swim speed and swim tilt for a pen
       operationId: get_behavior_swim_speed_deprecated_pens__penId__behavior_swimSpeed_get
       deprecated: true
@@ -297,7 +300,7 @@ paths:
   /pens/{penId}/behavior/breathingIndex:
     get:
       tags:
-      - v3.0
+      - V3 0
       summary: Breathing index for a pen
       operationId: get_behavior_breathing_index_deprecated_pens__penId__behavior_breathingIndex_get
       deprecated: true
@@ -343,7 +346,7 @@ paths:
   /pens/{penId}/welfareScores:
     get:
       tags:
-      - v3.0
+      - V3 0
       summary: Welfare scores for one or more pens
       operationId: get_pen_welfare_data_deprecated_pens__penId__welfareScores_get
       deprecated: true
@@ -388,146 +391,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    BiomassHarvestReportResponse:
-      properties:
-        reports:
-          items:
-            $ref: '#/components/schemas/BiomassHarvestReport'
-          type: array
-      type: object
-      required:
-      - reports
-      title: BiomassHarvestReportResponse
-    EnvironmentalDataLive:
-      properties:
-        penId:
-          anyOf:
-          - type: string
-          - type: 'null'
-        time:
-          type: string
-          format: date-time
-        temperature:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: temperature (celcius)
-        cameraDepth:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: camera depth (meters)
-        oxygenPct:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Dissolved Oxygen Saturation (%)
-        salinity:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Salinity parts per thousand (ppt)
-      type: object
-      required:
-      - time
-      title: EnvironmentalDataLive
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-      type: object
-      title: HTTPValidationError
-    LiceCount:
-      properties:
-        penId:
-          type: string
-        date:
-          type: string
-          format: date
-        sampleSize:
-          type: number
-          description: Number of samples used for estimating lice counts
-        adultFemale:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Average adult female lice per fish
-        adultFemaleConverted:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Average adult female lice (converted) per fish
-        mobile:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Average mobile lice per fish
-        mobileConverted:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Average mobile lice (converted) per fish
-        caligus:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Average caligus lice per fish
-      type: object
-      required:
-      - penId
-      - date
-      - sampleSize
-      - adultFemale
-      - adultFemaleConverted
-      - mobile
-      - mobileConverted
-      - caligus
-      title: LiceCount
-    PeriodEnum:
-      type: string
-      enum:
-      - h
-      - D
-      title: PeriodEnum
-    BiomassDailyModel:
-      properties:
-        penId:
-          type: string
-        date:
-          type: string
-          format: date
-        sampleSize:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Number of samples used for avgWeight
-        avgWeight:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Average weight in grams
-        kFactor:
-          anyOf:
-          - type: number
-          - type: 'null'
-        cv:
-          anyOf:
-          - type: number
-          - type: 'null'
-        weightDist:
-          $ref: '#/components/schemas/WeightDistModel'
-      type: object
-      required:
-      - penId
-      - date
-      - sampleSize
-      - avgWeight
-      - kFactor
-      - cv
-      - weightDist
-      title: BiomassDailyModel
     WelfareScoresDetail:
       properties:
         bodyWound:
@@ -600,6 +463,128 @@ components:
           - type: 'null'
       type: object
       title: WelfareScoresDetail
+    aqua_api__paginator__append_next_token___locals___Wrapped__3:
+      properties:
+        liceCount:
+          items:
+            $ref: '#/components/schemas/LiceCount'
+          type: array
+        nextToken:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
+      type: object
+      required:
+      - liceCount
+      title: Wrapped
+    Period15mEnum:
+      type: string
+      enum:
+      - h
+      - D
+      - 15min
+      title: Period15mEnum
+    EnvironmentalDataPoint:
+      properties:
+        penId:
+          type: string
+        fromTime:
+          type: string
+          format: date-time
+        toTime:
+          type: string
+          format: date-time
+        temperatureAvg:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Average temperature (celcius)
+        cameraDepthAvg:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: camera depth (meters)
+        cameraDepthMin:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: min camera depth (meters)
+        cameraDepthMax:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: max camera depth (meters)
+        oxygenPct:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Dissolved Oxygen Saturation (%)
+        salinity:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Salinity parts per thousand (ppt)
+        fishDensity:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Fish density (0 to 1)
+      type: object
+      required:
+      - penId
+      - fromTime
+      - toTime
+      title: EnvironmentalDataPoint
+    aqua_api__paginator__append_next_token___locals___Wrapped__6:
+      properties:
+        welfareScores:
+          items:
+            $ref: '#/components/schemas/WelfareScoresRecord'
+          type: array
+          description: List of welfare scores records
+        nextToken:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
+      type: object
+      required:
+      - welfareScores
+      title: Wrapped
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input: {}
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+      type: object
+      title: HTTPValidationError
     aqua_api__paginator__append_next_token___locals___Wrapped__2:
       properties:
         biomass:
@@ -615,21 +600,32 @@ components:
       required:
       - biomass
       title: Wrapped
-    aqua_api__paginator__append_next_token___locals___Wrapped__5:
+    BehaviorBreathingIndex:
       properties:
+        penId:
+          type: string
+        fromTime:
+          type: string
+          format: date-time
+        toTime:
+          type: string
+          format: date-time
+        sampleSize:
+          type: number
+          description: Number of samples used for breathingIndex
         breathingIndex:
-          items:
-            $ref: '#/components/schemas/BehaviorBreathingIndex'
-          type: array
-        nextToken:
           anyOf:
-          - type: string
+          - type: number
           - type: 'null'
-          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
+          description: Breathing index (0 to 1)
       type: object
       required:
+      - penId
+      - fromTime
+      - toTime
+      - sampleSize
       - breathingIndex
-      title: Wrapped
+      title: BehaviorBreathingIndex
     WelfareScoreProportions:
       properties:
         '1':
@@ -647,21 +643,86 @@ components:
       - '2'
       - '3'
       title: WelfareScoreProportions
-    WeightDistModel:
+    BiomassDailyModel:
       properties:
-        interval:
+        penId:
+          type: string
+        date:
+          type: string
+          format: date
+        sampleSize:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Number of samples used for avgWeight
+        avgWeight:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Average weight in grams
+        kFactor:
+          anyOf:
+          - type: number
+          - type: 'null'
+        cv:
+          anyOf:
+          - type: number
+          - type: 'null'
+        weightDist:
+          $ref: '#/components/schemas/WeightDistModel'
+      type: object
+      required:
+      - penId
+      - date
+      - sampleSize
+      - avgWeight
+      - kFactor
+      - cv
+      - weightDist
+      title: BiomassDailyModel
+    BiomassHarvestReportResponse:
+      properties:
+        reports:
           items:
-            type: number
-          type: array
-        distribution:
-          items:
-            type: number
+            $ref: '#/components/schemas/BiomassHarvestReport'
           type: array
       type: object
       required:
-      - interval
-      - distribution
-      title: WeightDistModel
+      - reports
+      title: BiomassHarvestReportResponse
+    WelfareScoresRecord:
+      properties:
+        penId:
+          type: string
+          description: Pen identifier
+        date:
+          type: string
+          format: date
+          description: Date of the welfare scores
+        welfareScores:
+          $ref: '#/components/schemas/WelfareScoresDetail'
+          description: Welfare scores for the day
+      type: object
+      required:
+      - penId
+      - date
+      - welfareScores
+      title: WelfareScoresRecord
+    aqua_api__paginator__append_next_token___locals___Wrapped__4:
+      properties:
+        swimSpeed:
+          items:
+            $ref: '#/components/schemas/BehaviorSwimSpeed'
+          type: array
+        nextToken:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
+      type: object
+      required:
+      - swimSpeed
+      title: Wrapped
     BehaviorSwimSpeed:
       properties:
         penId:
@@ -698,66 +759,85 @@ components:
       - swimTiltsampleSize
       - swimTilt
       title: BehaviorSwimSpeed
-    ValidationError:
+    EnvironmentalDataLive:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input: {}
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    aqua_api__paginator__append_next_token___locals___Wrapped__3:
-      properties:
-        liceCount:
-          items:
-            $ref: '#/components/schemas/LiceCount'
-          type: array
-        nextToken:
+        penId:
           anyOf:
           - type: string
           - type: 'null'
-          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
+        time:
+          type: string
+          format: date-time
+        temperature:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: temperature (celcius)
+        cameraDepth:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: camera depth (meters)
+        oxygenPct:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Dissolved Oxygen Saturation (%)
+        salinity:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Salinity parts per thousand (ppt)
       type: object
       required:
-      - liceCount
-      title: Wrapped
-    WelfareScoreDetail:
+      - time
+      title: EnvironmentalDataLive
+    LiceCount:
       properties:
-        active:
-          $ref: '#/components/schemas/WelfareScoreProportions'
-          description: Proportions of active welfare scores
-        nothing:
-          type: number
-          description: Proportion of healthy fish
+        penId:
+          type: string
+        date:
+          type: string
+          format: date
         sampleSize:
           type: number
-          description: Number of samples used to calculate scores
-        healed:
-          $ref: '#/components/schemas/WelfareScoreProportions'
-          description: Proportions of healed welfare scores
+          description: Number of samples used for estimating lice counts
+        adultFemale:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Average adult female lice per fish
+        adultFemaleConverted:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Average adult female lice (converted) per fish
+        mobile:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Average mobile lice per fish
+        mobileConverted:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Average mobile lice (converted) per fish
+        caligus:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Average caligus lice per fish
       type: object
       required:
-      - active
-      - nothing
+      - penId
+      - date
       - sampleSize
-      title: WelfareScoreDetail
+      - adultFemale
+      - adultFemaleConverted
+      - mobile
+      - mobileConverted
+      - caligus
+      title: LiceCount
     aqua_api__paginator__append_next_token___locals___Wrapped__1:
       properties:
         penId:
@@ -786,6 +866,26 @@ components:
       required:
       - data
       title: Wrapped
+    WelfareScoreDetail:
+      properties:
+        active:
+          $ref: '#/components/schemas/WelfareScoreProportions'
+          description: Proportions of active welfare scores
+        nothing:
+          type: number
+          description: Proportion of healthy fish
+        sampleSize:
+          type: number
+          description: Number of samples used to calculate scores
+        healed:
+          $ref: '#/components/schemas/WelfareScoreProportions'
+          description: Proportions of healed welfare scores
+      type: object
+      required:
+      - active
+      - nothing
+      - sampleSize
+      title: WelfareScoreDetail
     BiomassHarvestReport:
       properties:
         penId:
@@ -874,78 +974,17 @@ components:
       - roundWeightDistribution
       - createdAt
       title: BiomassHarvestReport
-    aqua_api__paginator__append_next_token___locals___Wrapped__6:
-      properties:
-        welfareScores:
-          items:
-            $ref: '#/components/schemas/WelfareScoresRecord'
-          type: array
-          description: List of welfare scores records
-        nextToken:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
-      type: object
-      required:
-      - welfareScores
-      title: Wrapped
-    BehaviorBreathingIndex:
-      properties:
-        penId:
-          type: string
-        fromTime:
-          type: string
-          format: date-time
-        toTime:
-          type: string
-          format: date-time
-        sampleSize:
-          type: number
-          description: Number of samples used for breathingIndex
-        breathingIndex:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Breathing index (0 to 1)
-      type: object
-      required:
-      - penId
-      - fromTime
-      - toTime
-      - sampleSize
-      - breathingIndex
-      title: BehaviorBreathingIndex
-    WelfareScoresRecord:
-      properties:
-        penId:
-          type: string
-          description: Pen identifier
-        date:
-          type: string
-          format: date
-          description: Date of the welfare scores
-        welfareScores:
-          $ref: '#/components/schemas/WelfareScoresDetail'
-          description: Welfare scores for the day
-      type: object
-      required:
-      - penId
-      - date
-      - welfareScores
-      title: WelfareScoresRecord
-    Period15mEnum:
+    PeriodEnum:
       type: string
       enum:
       - h
       - D
-      - 15min
-      title: Period15mEnum
-    aqua_api__paginator__append_next_token___locals___Wrapped__4:
+      title: PeriodEnum
+    aqua_api__paginator__append_next_token___locals___Wrapped__5:
       properties:
-        swimSpeed:
+        breathingIndex:
           items:
-            $ref: '#/components/schemas/BehaviorSwimSpeed'
+            $ref: '#/components/schemas/BehaviorBreathingIndex'
           type: array
         nextToken:
           anyOf:
@@ -954,56 +993,20 @@ components:
           description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
       type: object
       required:
-      - swimSpeed
+      - breathingIndex
       title: Wrapped
-    EnvironmentalDataPoint:
+    WeightDistModel:
       properties:
-        penId:
-          type: string
-        fromTime:
-          type: string
-          format: date-time
-        toTime:
-          type: string
-          format: date-time
-        temperatureAvg:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Average temperature (celcius)
-        cameraDepthAvg:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: camera depth (meters)
-        cameraDepthMin:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: min camera depth (meters)
-        cameraDepthMax:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: max camera depth (meters)
-        oxygenPct:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Dissolved Oxygen Saturation (%)
-        salinity:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Salinity parts per thousand (ppt)
-        fishDensity:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Fish density (0 to 1)
+        interval:
+          items:
+            type: number
+          type: array
+        distribution:
+          items:
+            type: number
+          type: array
       type: object
       required:
-      - penId
-      - fromTime
-      - toTime
-      title: EnvironmentalDataPoint
+      - interval
+      - distribution
+      title: WeightDistModel

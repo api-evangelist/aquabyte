@@ -1,0 +1,25 @@
+# Front Door AI Index — aquabyte — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: aquabyte
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.aquabyte.ai
+  final_host: www.aquabyte.ai
+  ownership: own
+  owner: aquabyte
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 1
+  host_score: 1
+  density: 1.92
+  words: 521
+  tiers:
+    agentic: 0
+    core: 1
+    model: 0
+  ambiguous: 0
+  top_terms:
+    AI: 1
