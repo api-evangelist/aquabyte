@@ -108,64 +108,6 @@ paths:
       - Environmental
 components:
   schemas:
-    EnvironmentalDataLive:
-      properties:
-        penId:
-          anyOf:
-          - type: string
-          - type: 'null'
-        time:
-          type: string
-          format: date-time
-        temperature:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: temperature (celcius)
-        cameraDepth:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: camera depth (meters)
-        oxygenPct:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Dissolved Oxygen Saturation (%)
-        salinity:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Salinity parts per thousand (ppt)
-      type: object
-      required:
-      - time
-      title: EnvironmentalDataLive
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input: {}
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     HTTPValidationError:
       properties:
         detail:
@@ -202,13 +144,49 @@ components:
       required:
       - data
       title: Wrapped
-    Period15mEnum:
-      type: string
-      enum:
-      - h
-      - D
-      - 15min
-      title: Period15mEnum
+    EnvironmentalDataLive:
+      properties:
+        penId:
+          anyOf:
+          - type: string
+          - type: 'null'
+        time:
+          type: string
+          format: date-time
+        temperature:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: temperature (celcius)
+        cameraDepth:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: camera depth (meters)
+        oxygenPct:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Dissolved Oxygen Saturation (%)
+        salinity:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Salinity parts per thousand (ppt)
+      type: object
+      required:
+      - time
+      title: EnvironmentalDataLive
+    GetEnvironmentalLiveAllResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/EnvironmentalDataLive'
+          type: array
+      type: object
+      required:
+      - data
+      title: GetEnvironmentalLiveAllResponse
     EnvironmentalDataPoint:
       properties:
         penId:
@@ -260,13 +238,35 @@ components:
       - fromTime
       - toTime
       title: EnvironmentalDataPoint
-    GetEnvironmentalLiveAllResponse:
+    ValidationError:
       properties:
-        data:
+        loc:
           items:
-            $ref: '#/components/schemas/EnvironmentalDataLive'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input: {}
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
-      - data
-      title: GetEnvironmentalLiveAllResponse
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Period15mEnum:
+      type: string
+      enum:
+      - h
+      - D
+      - 15min
+      title: Period15mEnum

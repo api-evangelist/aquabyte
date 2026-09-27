@@ -55,31 +55,6 @@ paths:
       - Sites
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input: {}
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     HTTPValidationError:
       properties:
         detail:
@@ -88,6 +63,33 @@ components:
           type: array
       type: object
       title: HTTPValidationError
+    Site:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        governmentSiteNumber:
+          anyOf:
+          - type: integer
+          - type: 'null'
+        external_site_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Site Id
+          description: The corresponding site id from data integration
+        pens:
+          items:
+            $ref: '#/components/schemas/Pen'
+          type: array
+      type: object
+      required:
+      - id
+      - name
+      - governmentSiteNumber
+      - pens
+      title: Site
     SitesResponse:
       properties:
         sites:
@@ -123,30 +125,28 @@ components:
       - penCode
       - isActive
       title: Pen
-    Site:
+    ValidationError:
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        governmentSiteNumber:
-          anyOf:
-          - type: integer
-          - type: 'null'
-        external_site_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: External Site Id
-          description: The corresponding site id from data integration
-        pens:
+        loc:
           items:
-            $ref: '#/components/schemas/Pen'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input: {}
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
-      - id
-      - name
-      - governmentSiteNumber
-      - pens
-      title: Site
+      - loc
+      - msg
+      - type
+      title: ValidationError

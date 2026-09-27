@@ -138,6 +138,61 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+      type: object
+      title: HTTPValidationError
+    PeriodEnum:
+      type: string
+      enum:
+      - h
+      - D
+      title: PeriodEnum
+    BehaviorBreathingIndex:
+      properties:
+        penId:
+          type: string
+        fromTime:
+          type: string
+          format: date-time
+        toTime:
+          type: string
+          format: date-time
+        sampleSize:
+          type: number
+          description: Number of samples used for breathingIndex
+        breathingIndex:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Breathing index (0 to 1)
+      type: object
+      required:
+      - penId
+      - fromTime
+      - toTime
+      - sampleSize
+      - breathingIndex
+      title: BehaviorBreathingIndex
+    aqua_api__paginator__append_next_token___locals___Wrapped__5:
+      properties:
+        breathingIndex:
+          items:
+            $ref: '#/components/schemas/BehaviorBreathingIndex'
+          type: array
+        nextToken:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
+      type: object
+      required:
+      - breathingIndex
+      title: Wrapped
     BehaviorSwimSpeed:
       properties:
         penId:
@@ -199,61 +254,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-      type: object
-      title: HTTPValidationError
-    BehaviorBreathingIndex:
-      properties:
-        penId:
-          type: string
-        fromTime:
-          type: string
-          format: date-time
-        toTime:
-          type: string
-          format: date-time
-        sampleSize:
-          type: number
-          description: Number of samples used for breathingIndex
-        breathingIndex:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Breathing index (0 to 1)
-      type: object
-      required:
-      - penId
-      - fromTime
-      - toTime
-      - sampleSize
-      - breathingIndex
-      title: BehaviorBreathingIndex
-    PeriodEnum:
-      type: string
-      enum:
-      - h
-      - D
-      title: PeriodEnum
-    aqua_api__paginator__append_next_token___locals___Wrapped__5:
-      properties:
-        breathingIndex:
-          items:
-            $ref: '#/components/schemas/BehaviorBreathingIndex'
-          type: array
-        nextToken:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
-      type: object
-      required:
-      - breathingIndex
-      title: Wrapped
     aqua_api__paginator__append_next_token___locals___Wrapped__4:
       properties:
         swimSpeed:

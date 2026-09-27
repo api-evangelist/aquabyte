@@ -5,14 +5,16 @@
   ],
   "outputs": [
     "aquabyte-environmental-api-openapi.yml",
+    "aquabyte-pens-api-openapi.yml",
     "aquabyte-sites-api-openapi.yml",
     "aquabyte-behaviour-api-openapi.yml",
     "aquabyte-biomass-api-openapi.yml",
     "aquabyte-lice-api-openapi.yml",
-    "aquabyte-v3-0-api-openapi.yml",
     "aquabyte-welfare-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -22,10 +24,20 @@
     "aquabyte-data-api-openapi-original.json: tagged paths GET /sites -> Sites",
     "aquabyte-data-api-openapi-original.json: tagged paths GET /sites/{siteId} -> Sites",
     "aquabyte-data-api-openapi-original.json: tagged paths GET /environmental -> Environmental",
+    "aquabyte-data-api-openapi-original.json: tagged paths GET /pens/{penId}/environmental -> Pens",
+    "aquabyte-data-api-openapi-original.json: tagged paths GET /pens/{penId}/environmental/latest -> Pens",
     "aquabyte-data-api-openapi-original.json: tagged paths GET /environmental/latest -> Environmental",
+    "aquabyte-data-api-openapi-original.json: tagged paths GET /pens/{penId}/biomass -> Pens",
+    "aquabyte-data-api-openapi-original.json: tagged paths GET /pens/{penId}/biomass/harvestReport -> Pens",
+    "aquabyte-data-api-openapi-original.json: tagged paths GET /pens/{penId}/liceCount -> Pens",
+    "aquabyte-data-api-openapi-original.json: tagged paths GET /pens/{penId}/behavior/swimSpeed -> Pens",
+    "aquabyte-data-api-openapi-original.json: tagged paths GET /pens/{penId}/behavior/breathingIndex -> Pens",
+    "aquabyte-data-api-openapi-original.json: tagged paths GET /pens/{penId}/welfareScores -> Pens",
     "aquabyte-data-api-openapi-original.json: declared missing tag: Environmental",
+    "aquabyte-data-api-openapi-original.json: declared missing tag: Pens",
     "aquabyte-data-api-openapi-original.json: declared missing tag: Sites",
-    "apis.yml register: already-registered"
+    "superseded outputs removed: aquabyte-v3-0-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 7 total)"
   ],
   "skipped": [
     "_original/aquabyte-data-api-openapi.yml: archived document superseded by a larger archived document",
