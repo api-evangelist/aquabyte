@@ -63,6 +63,66 @@ components:
           type: array
       type: object
       title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input: {}
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Pen:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        penCode:
+          anyOf:
+          - type: string
+          - type: 'null'
+        isActive:
+          type: boolean
+        external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+          description: The corresponding id from data integration
+      type: object
+      required:
+      - id
+      - name
+      - penCode
+      - isActive
+      title: Pen
+    SitesResponse:
+      properties:
+        sites:
+          items:
+            $ref: '#/components/schemas/Site'
+          type: array
+      type: object
+      required:
+      - sites
+      title: SitesResponse
     Site:
       properties:
         id:
@@ -90,63 +150,3 @@ components:
       - governmentSiteNumber
       - pens
       title: Site
-    SitesResponse:
-      properties:
-        sites:
-          items:
-            $ref: '#/components/schemas/Site'
-          type: array
-      type: object
-      required:
-      - sites
-      title: SitesResponse
-    Pen:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        penCode:
-          anyOf:
-          - type: string
-          - type: 'null'
-        isActive:
-          type: boolean
-        external_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: External Id
-          description: The corresponding id from data integration
-      type: object
-      required:
-      - id
-      - name
-      - penCode
-      - isActive
-      title: Pen
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input: {}
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError

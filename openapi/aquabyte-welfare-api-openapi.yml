@@ -124,6 +124,14 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    DataQualityEnum:
+      type: string
+      enum:
+      - high
+      - medium
+      - low
+      - ''
+      title: DataQualityEnum
     HTTPValidationError:
       properties:
         detail:
@@ -132,6 +140,27 @@ components:
           type: array
       type: object
       title: HTTPValidationError
+    DowngradeScoresSubcategory:
+      properties:
+        active:
+          $ref: '#/components/schemas/DowngradeScores'
+          description: Downgrade scores for active wounds
+        healed:
+          $ref: '#/components/schemas/DowngradeScores'
+          description: Downgrade scores for healed wounds
+      type: object
+      title: DowngradeScoresSubcategory
+    SuperiorRateResponse:
+      properties:
+        superiorRate:
+          items:
+            $ref: '#/components/schemas/SuperiorRateRecord'
+          type: array
+          description: List of superior rate records
+      type: object
+      required:
+      - superiorRate
+      title: SuperiorRateResponse
     DowngradeRuleset:
       properties:
         bodyWound:
@@ -222,6 +251,47 @@ components:
       additionalProperties: false
       type: object
       title: DowngradeRuleset
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input: {}
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    aqua_api__paginator__append_next_token___locals___Wrapped__6:
+      properties:
+        welfareScores:
+          items:
+            $ref: '#/components/schemas/WelfareScoresRecord'
+          type: array
+          description: List of welfare scores records
+        nextToken:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
+      type: object
+      required:
+      - welfareScores
+      title: Wrapped
     WelfareScoresRecord:
       properties:
         penId:
@@ -240,36 +310,6 @@ components:
       - date
       - welfareScores
       title: WelfareScoresRecord
-    DowngradeScoresSubcategory:
-      properties:
-        active:
-          $ref: '#/components/schemas/DowngradeScores'
-          description: Downgrade scores for active wounds
-        healed:
-          $ref: '#/components/schemas/DowngradeScores'
-          description: Downgrade scores for healed wounds
-      type: object
-      title: DowngradeScoresSubcategory
-    WelfareScoreDetail:
-      properties:
-        active:
-          $ref: '#/components/schemas/WelfareScoreProportions'
-          description: Proportions of active welfare scores
-        nothing:
-          type: number
-          description: Proportion of healthy fish
-        sampleSize:
-          type: number
-          description: Number of samples used to calculate scores
-        healed:
-          $ref: '#/components/schemas/WelfareScoreProportions'
-          description: Proportions of healed welfare scores
-      type: object
-      required:
-      - active
-      - nothing
-      - sampleSize
-      title: WelfareScoreDetail
     WelfareScoreProportions:
       properties:
         '1':
@@ -287,17 +327,6 @@ components:
       - '2'
       - '3'
       title: WelfareScoreProportions
-    SuperiorRateResponse:
-      properties:
-        superiorRate:
-          items:
-            $ref: '#/components/schemas/SuperiorRateRecord'
-          type: array
-          description: List of superior rate records
-      type: object
-      required:
-      - superiorRate
-      title: SuperiorRateResponse
     WelfareScoresDetail:
       properties:
         bodyWound:
@@ -370,22 +399,6 @@ components:
           - type: 'null'
       type: object
       title: WelfareScoresDetail
-    aqua_api__paginator__append_next_token___locals___Wrapped__6:
-      properties:
-        welfareScores:
-          items:
-            $ref: '#/components/schemas/WelfareScoresRecord'
-          type: array
-          description: List of welfare scores records
-        nextToken:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
-      type: object
-      required:
-      - welfareScores
-      title: Wrapped
     DowngradeScores:
       properties:
         score1:
@@ -402,39 +415,26 @@ components:
           default: 0.0
       type: object
       title: DowngradeScores
-    ValidationError:
+    WelfareScoreDetail:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input: {}
-        ctx:
-          type: object
-          title: Context
+        active:
+          $ref: '#/components/schemas/WelfareScoreProportions'
+          description: Proportions of active welfare scores
+        nothing:
+          type: number
+          description: Proportion of healthy fish
+        sampleSize:
+          type: number
+          description: Number of samples used to calculate scores
+        healed:
+          $ref: '#/components/schemas/WelfareScoreProportions'
+          description: Proportions of healed welfare scores
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    DataQualityEnum:
-      type: string
-      enum:
-      - high
-      - medium
-      - low
-      - ''
-      title: DataQualityEnum
+      - active
+      - nothing
+      - sampleSize
+      title: WelfareScoreDetail
     SuperiorRateRecord:
       properties:
         penId:

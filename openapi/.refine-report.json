@@ -12,9 +12,7 @@
     "aquabyte-lice-api-openapi.yml",
     "aquabyte-welfare-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -36,8 +34,7 @@
     "aquabyte-data-api-openapi-original.json: declared missing tag: Environmental",
     "aquabyte-data-api-openapi-original.json: declared missing tag: Pens",
     "aquabyte-data-api-openapi-original.json: declared missing tag: Sites",
-    "superseded outputs removed: aquabyte-v3-0-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 7 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "_original/aquabyte-data-api-openapi.yml: archived document superseded by a larger archived document",
@@ -45,8 +42,8 @@
     "aquabyte-biomass-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "aquabyte-environmental-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "aquabyte-lice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aquabyte-pens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "aquabyte-sites-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "aquabyte-v3-0-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "aquabyte-welfare-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }
