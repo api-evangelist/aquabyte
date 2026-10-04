@@ -128,14 +128,58 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
+    BiomassDailyModel:
       properties:
-        detail:
+        penId:
+          type: string
+        date:
+          type: string
+          format: date
+        sampleSize:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Number of samples used for avgWeight
+        avgWeight:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Average weight in grams
+        kFactor:
+          anyOf:
+          - type: number
+          - type: 'null'
+        cv:
+          anyOf:
+          - type: number
+          - type: 'null'
+        weightDist:
+          $ref: '#/components/schemas/WeightDistModel'
+      type: object
+      required:
+      - penId
+      - date
+      - sampleSize
+      - avgWeight
+      - kFactor
+      - cv
+      - weightDist
+      title: BiomassDailyModel
+    WeightDistModel:
+      properties:
+        interval:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            type: number
+          type: array
+        distribution:
+          items:
+            type: number
           type: array
       type: object
-      title: HTTPValidationError
+      required:
+      - interval
+      - distribution
+      title: WeightDistModel
     BiomassHarvestReport:
       properties:
         penId:
@@ -224,21 +268,16 @@ components:
       - roundWeightDistribution
       - createdAt
       title: BiomassHarvestReport
-    WeightDistModel:
+    BiomassHarvestReportResponse:
       properties:
-        interval:
+        reports:
           items:
-            type: number
-          type: array
-        distribution:
-          items:
-            type: number
+            $ref: '#/components/schemas/BiomassHarvestReport'
           type: array
       type: object
       required:
-      - interval
-      - distribution
-      title: WeightDistModel
+      - reports
+      title: BiomassHarvestReportResponse
     ValidationError:
       properties:
         loc:
@@ -264,53 +303,6 @@ components:
       - msg
       - type
       title: ValidationError
-    BiomassHarvestReportResponse:
-      properties:
-        reports:
-          items:
-            $ref: '#/components/schemas/BiomassHarvestReport'
-          type: array
-      type: object
-      required:
-      - reports
-      title: BiomassHarvestReportResponse
-    BiomassDailyModel:
-      properties:
-        penId:
-          type: string
-        date:
-          type: string
-          format: date
-        sampleSize:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Number of samples used for avgWeight
-        avgWeight:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Average weight in grams
-        kFactor:
-          anyOf:
-          - type: number
-          - type: 'null'
-        cv:
-          anyOf:
-          - type: number
-          - type: 'null'
-        weightDist:
-          $ref: '#/components/schemas/WeightDistModel'
-      type: object
-      required:
-      - penId
-      - date
-      - sampleSize
-      - avgWeight
-      - kFactor
-      - cv
-      - weightDist
-      title: BiomassDailyModel
     aqua_api__paginator__append_next_token___locals___Wrapped__2:
       properties:
         biomass:
@@ -326,3 +318,11 @@ components:
       required:
       - biomass
       title: Wrapped
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+      type: object
+      title: HTTPValidationError

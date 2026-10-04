@@ -138,14 +138,72 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
+    aqua_api__paginator__append_next_token___locals___Wrapped__5:
       properties:
-        detail:
+        breathingIndex:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: '#/components/schemas/BehaviorBreathingIndex'
           type: array
+        nextToken:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
       type: object
-      title: HTTPValidationError
+      required:
+      - breathingIndex
+      title: Wrapped
+    BehaviorSwimSpeed:
+      properties:
+        penId:
+          type: string
+        fromTime:
+          type: string
+          format: date-time
+        toTime:
+          type: string
+          format: date-time
+        swimSpeedsampleSize:
+          type: number
+          description: Number of samples used for swimSpeed
+        swimSpeed:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Average swim speed (body length/s)
+        swimTiltsampleSize:
+          type: number
+          description: Number of samples used for swimTilt
+        swimTilt:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Average Swim Tilt (degree)
+      type: object
+      required:
+      - penId
+      - fromTime
+      - toTime
+      - swimSpeedsampleSize
+      - swimSpeed
+      - swimTiltsampleSize
+      - swimTilt
+      title: BehaviorSwimSpeed
+    aqua_api__paginator__append_next_token___locals___Wrapped__4:
+      properties:
+        swimSpeed:
+          items:
+            $ref: '#/components/schemas/BehaviorSwimSpeed'
+          type: array
+        nextToken:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
+      type: object
+      required:
+      - swimSpeed
+      title: Wrapped
     BehaviorBreathingIndex:
       properties:
         penId:
@@ -197,75 +255,17 @@ components:
       - msg
       - type
       title: ValidationError
-    aqua_api__paginator__append_next_token___locals___Wrapped__5:
-      properties:
-        breathingIndex:
-          items:
-            $ref: '#/components/schemas/BehaviorBreathingIndex'
-          type: array
-        nextToken:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
-      type: object
-      required:
-      - breathingIndex
-      title: Wrapped
     PeriodEnum:
       type: string
       enum:
       - h
       - D
       title: PeriodEnum
-    aqua_api__paginator__append_next_token___locals___Wrapped__4:
+    HTTPValidationError:
       properties:
-        swimSpeed:
+        detail:
           items:
-            $ref: '#/components/schemas/BehaviorSwimSpeed'
+            $ref: '#/components/schemas/ValidationError'
           type: array
-        nextToken:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
       type: object
-      required:
-      - swimSpeed
-      title: Wrapped
-    BehaviorSwimSpeed:
-      properties:
-        penId:
-          type: string
-        fromTime:
-          type: string
-          format: date-time
-        toTime:
-          type: string
-          format: date-time
-        swimSpeedsampleSize:
-          type: number
-          description: Number of samples used for swimSpeed
-        swimSpeed:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Average swim speed (body length/s)
-        swimTiltsampleSize:
-          type: number
-          description: Number of samples used for swimTilt
-        swimTilt:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Average Swim Tilt (degree)
-      type: object
-      required:
-      - penId
-      - fromTime
-      - toTime
-      - swimSpeedsampleSize
-      - swimSpeed
-      - swimTiltsampleSize
-      - swimTilt
-      title: BehaviorSwimSpeed
+      title: HTTPValidationError

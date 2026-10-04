@@ -108,14 +108,6 @@ paths:
       - Environmental
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-      type: object
-      title: HTTPValidationError
     EnvironmentalDataLive:
       properties:
         penId:
@@ -177,6 +169,23 @@ components:
       required:
       - data
       title: Wrapped
+    Period15mEnum:
+      type: string
+      enum:
+      - h
+      - D
+      - 15min
+      title: Period15mEnum
+    GetEnvironmentalLiveAllResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/EnvironmentalDataLive'
+          type: array
+      type: object
+      required:
+      - data
+      title: GetEnvironmentalLiveAllResponse
     ValidationError:
       properties:
         loc:
@@ -253,20 +262,11 @@ components:
       - fromTime
       - toTime
       title: EnvironmentalDataPoint
-    Period15mEnum:
-      type: string
-      enum:
-      - h
-      - D
-      - 15min
-      title: Period15mEnum
-    GetEnvironmentalLiveAllResponse:
+    HTTPValidationError:
       properties:
-        data:
+        detail:
           items:
-            $ref: '#/components/schemas/EnvironmentalDataLive'
+            $ref: '#/components/schemas/ValidationError'
           type: array
       type: object
-      required:
-      - data
-      title: GetEnvironmentalLiveAllResponse
+      title: HTTPValidationError

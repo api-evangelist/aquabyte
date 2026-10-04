@@ -55,14 +55,43 @@ paths:
       - Sites
 components:
   schemas:
-    HTTPValidationError:
+    SitesResponse:
       properties:
-        detail:
+        sites:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: '#/components/schemas/Site'
           type: array
       type: object
-      title: HTTPValidationError
+      required:
+      - sites
+      title: SitesResponse
+    Site:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        governmentSiteNumber:
+          anyOf:
+          - type: integer
+          - type: 'null'
+        external_site_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Site Id
+          description: The corresponding site id from data integration
+        pens:
+          items:
+            $ref: '#/components/schemas/Pen'
+          type: array
+      type: object
+      required:
+      - id
+      - name
+      - governmentSiteNumber
+      - pens
+      title: Site
     ValidationError:
       properties:
         loc:
@@ -113,40 +142,11 @@ components:
       - penCode
       - isActive
       title: Pen
-    SitesResponse:
+    HTTPValidationError:
       properties:
-        sites:
+        detail:
           items:
-            $ref: '#/components/schemas/Site'
+            $ref: '#/components/schemas/ValidationError'
           type: array
       type: object
-      required:
-      - sites
-      title: SitesResponse
-    Site:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        governmentSiteNumber:
-          anyOf:
-          - type: integer
-          - type: 'null'
-        external_site_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: External Site Id
-          description: The corresponding site id from data integration
-        pens:
-          items:
-            $ref: '#/components/schemas/Pen'
-          type: array
-      type: object
-      required:
-      - id
-      - name
-      - governmentSiteNumber
-      - pens
-      title: Site
+      title: HTTPValidationError
