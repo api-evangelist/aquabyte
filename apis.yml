@@ -306,6 +306,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: RateLimits
+  url: rate-limits/aquabyte-rate-limits.yml
 - url: https://www.aquabyte.ai/articles
   type: Blog
 - type: CapabilityMap
