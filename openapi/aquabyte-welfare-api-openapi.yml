@@ -124,14 +124,60 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    DataQualityEnum:
-      type: string
-      enum:
-      - high
-      - medium
-      - low
-      - ''
-      title: DataQualityEnum
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+      type: object
+      title: HTTPValidationError
+    DowngradeScoresSubcategory:
+      properties:
+        active:
+          $ref: '#/components/schemas/DowngradeScores'
+          description: Downgrade scores for active wounds
+        healed:
+          $ref: '#/components/schemas/DowngradeScores'
+          description: Downgrade scores for healed wounds
+      type: object
+      title: DowngradeScoresSubcategory
+    WelfareScoreDetail:
+      properties:
+        active:
+          $ref: '#/components/schemas/WelfareScoreProportions'
+          description: Proportions of active welfare scores
+        nothing:
+          type: number
+          description: Proportion of healthy fish
+        sampleSize:
+          type: number
+          description: Number of samples used to calculate scores
+        healed:
+          $ref: '#/components/schemas/WelfareScoreProportions'
+          description: Proportions of healed welfare scores
+      type: object
+      required:
+      - active
+      - nothing
+      - sampleSize
+      title: WelfareScoreDetail
+    aqua_api__paginator__append_next_token___locals___Wrapped__6:
+      properties:
+        welfareScores:
+          items:
+            $ref: '#/components/schemas/WelfareScoresRecord'
+          type: array
+          description: List of welfare scores records
+        nextToken:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
+      type: object
+      required:
+      - welfareScores
+      title: Wrapped
     WelfareScoresDetail:
       properties:
         bodyWound:
@@ -204,16 +250,125 @@ components:
           - type: 'null'
       type: object
       title: WelfareScoresDetail
-    DowngradeScoresSubcategory:
+    ValidationError:
       properties:
-        active:
-          $ref: '#/components/schemas/DowngradeScores'
-          description: Downgrade scores for active wounds
-        healed:
-          $ref: '#/components/schemas/DowngradeScores'
-          description: Downgrade scores for healed wounds
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input: {}
+        ctx:
+          type: object
+          title: Context
       type: object
-      title: DowngradeScoresSubcategory
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    WelfareScoresRecord:
+      properties:
+        penId:
+          type: string
+          description: Pen identifier
+        date:
+          type: string
+          format: date
+          description: Date of the welfare scores
+        welfareScores:
+          $ref: '#/components/schemas/WelfareScoresDetail'
+          description: Welfare scores for the day
+      type: object
+      required:
+      - penId
+      - date
+      - welfareScores
+      title: WelfareScoresRecord
+    WelfareScoreProportions:
+      properties:
+        '1':
+          type: number
+          description: Proportion of fish with score 1
+        '2':
+          type: number
+          description: Proportion of fish with score 2
+        '3':
+          type: number
+          description: Proportion of fish with score 3
+      type: object
+      required:
+      - '1'
+      - '2'
+      - '3'
+      title: WelfareScoreProportions
+    DataQualityEnum:
+      type: string
+      enum:
+      - high
+      - medium
+      - low
+      - ''
+      title: DataQualityEnum
+    SuperiorRateResponse:
+      properties:
+        superiorRate:
+          items:
+            $ref: '#/components/schemas/SuperiorRateRecord'
+          type: array
+          description: List of superior rate records
+      type: object
+      required:
+      - superiorRate
+      title: SuperiorRateResponse
+    SuperiorRateRecord:
+      properties:
+        penId:
+          type: string
+          description: Pen identifier
+        date:
+          type: string
+          format: date
+          description: Date of the superior rate record
+        superiorRate:
+          type: number
+          description: Superior rate value for the pen on the given date
+        dataQuality:
+          anyOf:
+          - $ref: '#/components/schemas/DataQualityEnum'
+          - type: 'null'
+          description: Data quality for the day
+      type: object
+      required:
+      - penId
+      - date
+      - superiorRate
+      - dataQuality
+      title: SuperiorRateRecord
+    DowngradeScores:
+      properties:
+        score1:
+          type: number
+          description: Downgrade score for score 1
+          default: 0.0
+        score2:
+          type: number
+          description: Downgrade score for score 2
+          default: 0.0
+        score3:
+          type: number
+          description: Downgrade score for score 3
+          default: 0.0
+      type: object
+      title: DowngradeScores
     DowngradeRuleset:
       properties:
         bodyWound:
@@ -304,158 +459,3 @@ components:
       additionalProperties: false
       type: object
       title: DowngradeRuleset
-    DowngradeScores:
-      properties:
-        score1:
-          type: number
-          description: Downgrade score for score 1
-          default: 0.0
-        score2:
-          type: number
-          description: Downgrade score for score 2
-          default: 0.0
-        score3:
-          type: number
-          description: Downgrade score for score 3
-          default: 0.0
-      type: object
-      title: DowngradeScores
-    SuperiorRateRecord:
-      properties:
-        penId:
-          type: string
-          description: Pen identifier
-        date:
-          type: string
-          format: date
-          description: Date of the superior rate record
-        superiorRate:
-          type: number
-          description: Superior rate value for the pen on the given date
-        dataQuality:
-          anyOf:
-          - $ref: '#/components/schemas/DataQualityEnum'
-          - type: 'null'
-          description: Data quality for the day
-      type: object
-      required:
-      - penId
-      - date
-      - superiorRate
-      - dataQuality
-      title: SuperiorRateRecord
-    WelfareScoresRecord:
-      properties:
-        penId:
-          type: string
-          description: Pen identifier
-        date:
-          type: string
-          format: date
-          description: Date of the welfare scores
-        welfareScores:
-          $ref: '#/components/schemas/WelfareScoresDetail'
-          description: Welfare scores for the day
-      type: object
-      required:
-      - penId
-      - date
-      - welfareScores
-      title: WelfareScoresRecord
-    WelfareScoreDetail:
-      properties:
-        active:
-          $ref: '#/components/schemas/WelfareScoreProportions'
-          description: Proportions of active welfare scores
-        nothing:
-          type: number
-          description: Proportion of healthy fish
-        sampleSize:
-          type: number
-          description: Number of samples used to calculate scores
-        healed:
-          $ref: '#/components/schemas/WelfareScoreProportions'
-          description: Proportions of healed welfare scores
-      type: object
-      required:
-      - active
-      - nothing
-      - sampleSize
-      title: WelfareScoreDetail
-    aqua_api__paginator__append_next_token___locals___Wrapped__6:
-      properties:
-        welfareScores:
-          items:
-            $ref: '#/components/schemas/WelfareScoresRecord'
-          type: array
-          description: List of welfare scores records
-        nextToken:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
-      type: object
-      required:
-      - welfareScores
-      title: Wrapped
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input: {}
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    SuperiorRateResponse:
-      properties:
-        superiorRate:
-          items:
-            $ref: '#/components/schemas/SuperiorRateRecord'
-          type: array
-          description: List of superior rate records
-      type: object
-      required:
-      - superiorRate
-      title: SuperiorRateResponse
-    WelfareScoreProportions:
-      properties:
-        '1':
-          type: number
-          description: Proportion of fish with score 1
-        '2':
-          type: number
-          description: Proportion of fish with score 2
-        '3':
-          type: number
-          description: Proportion of fish with score 3
-      type: object
-      required:
-      - '1'
-      - '2'
-      - '3'
-      title: WelfareScoreProportions
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-      type: object
-      title: HTTPValidationError

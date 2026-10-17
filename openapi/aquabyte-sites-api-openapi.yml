@@ -55,16 +55,6 @@ paths:
       - Sites
 components:
   schemas:
-    SitesResponse:
-      properties:
-        sites:
-          items:
-            $ref: '#/components/schemas/Site'
-          type: array
-      type: object
-      required:
-      - sites
-      title: SitesResponse
     Site:
       properties:
         id:
@@ -92,6 +82,14 @@ components:
       - governmentSiteNumber
       - pens
       title: Site
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+      type: object
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -117,6 +115,16 @@ components:
       - msg
       - type
       title: ValidationError
+    SitesResponse:
+      properties:
+        sites:
+          items:
+            $ref: '#/components/schemas/Site'
+          type: array
+      type: object
+      required:
+      - sites
+      title: SitesResponse
     Pen:
       properties:
         id:
@@ -142,11 +150,3 @@ components:
       - penCode
       - isActive
       title: Pen
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-      type: object
-      title: HTTPValidationError

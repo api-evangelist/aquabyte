@@ -138,21 +138,39 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    aqua_api__paginator__append_next_token___locals___Wrapped__5:
+    HTTPValidationError:
       properties:
-        breathingIndex:
+        detail:
           items:
-            $ref: '#/components/schemas/BehaviorBreathingIndex'
+            $ref: '#/components/schemas/ValidationError'
           type: array
-        nextToken:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input: {}
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
-      - breathingIndex
-      title: Wrapped
+      - loc
+      - msg
+      - type
+      title: ValidationError
     BehaviorSwimSpeed:
       properties:
         penId:
@@ -189,11 +207,17 @@ components:
       - swimTiltsampleSize
       - swimTilt
       title: BehaviorSwimSpeed
-    aqua_api__paginator__append_next_token___locals___Wrapped__4:
+    PeriodEnum:
+      type: string
+      enum:
+      - h
+      - D
+      title: PeriodEnum
+    aqua_api__paginator__append_next_token___locals___Wrapped__5:
       properties:
-        swimSpeed:
+        breathingIndex:
           items:
-            $ref: '#/components/schemas/BehaviorSwimSpeed'
+            $ref: '#/components/schemas/BehaviorBreathingIndex'
           type: array
         nextToken:
           anyOf:
@@ -202,7 +226,7 @@ components:
           description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
       type: object
       required:
-      - swimSpeed
+      - breathingIndex
       title: Wrapped
     BehaviorBreathingIndex:
       properties:
@@ -230,42 +254,18 @@ components:
       - sampleSize
       - breathingIndex
       title: BehaviorBreathingIndex
-    ValidationError:
+    aqua_api__paginator__append_next_token___locals___Wrapped__4:
       properties:
-        loc:
+        swimSpeed:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/BehaviorSwimSpeed'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input: {}
-        ctx:
-          type: object
-          title: Context
+        nextToken:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    PeriodEnum:
-      type: string
-      enum:
-      - h
-      - D
-      title: PeriodEnum
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-      type: object
-      title: HTTPValidationError
+      - swimSpeed
+      title: Wrapped

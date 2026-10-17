@@ -72,6 +72,54 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+      type: object
+      title: HTTPValidationError
+    aqua_api__paginator__append_next_token___locals___Wrapped__3:
+      properties:
+        liceCount:
+          items:
+            $ref: '#/components/schemas/LiceCount'
+          type: array
+        nextToken:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
+      type: object
+      required:
+      - liceCount
+      title: Wrapped
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input: {}
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     LiceCount:
       properties:
         penId:
@@ -118,51 +166,3 @@ components:
       - mobileConverted
       - caligus
       title: LiceCount
-    aqua_api__paginator__append_next_token___locals___Wrapped__3:
-      properties:
-        liceCount:
-          items:
-            $ref: '#/components/schemas/LiceCount'
-          type: array
-        nextToken:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: If this is null, the result set is complete. If not null, fetch the next batch of result by passing this token to the next request.
-      type: object
-      required:
-      - liceCount
-      title: Wrapped
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input: {}
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-      type: object
-      title: HTTPValidationError

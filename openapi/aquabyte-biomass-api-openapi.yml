@@ -128,58 +128,39 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    BiomassDailyModel:
+    HTTPValidationError:
       properties:
-        penId:
-          type: string
-        date:
-          type: string
-          format: date
-        sampleSize:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Number of samples used for avgWeight
-        avgWeight:
-          anyOf:
-          - type: number
-          - type: 'null'
-          description: Average weight in grams
-        kFactor:
-          anyOf:
-          - type: number
-          - type: 'null'
-        cv:
-          anyOf:
-          - type: number
-          - type: 'null'
-        weightDist:
-          $ref: '#/components/schemas/WeightDistModel'
-      type: object
-      required:
-      - penId
-      - date
-      - sampleSize
-      - avgWeight
-      - kFactor
-      - cv
-      - weightDist
-      title: BiomassDailyModel
-    WeightDistModel:
-      properties:
-        interval:
+        detail:
           items:
-            type: number
-          type: array
-        distribution:
-          items:
-            type: number
+            $ref: '#/components/schemas/ValidationError'
           type: array
       type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input: {}
+        ctx:
+          type: object
+          title: Context
+      type: object
       required:
-      - interval
-      - distribution
-      title: WeightDistModel
+      - loc
+      - msg
+      - type
+      title: ValidationError
     BiomassHarvestReport:
       properties:
         penId:
@@ -278,31 +259,21 @@ components:
       required:
       - reports
       title: BiomassHarvestReportResponse
-    ValidationError:
+    WeightDistModel:
       properties:
-        loc:
+        interval:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            type: number
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input: {}
-        ctx:
-          type: object
-          title: Context
+        distribution:
+          items:
+            type: number
+          type: array
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - interval
+      - distribution
+      title: WeightDistModel
     aqua_api__paginator__append_next_token___locals___Wrapped__2:
       properties:
         biomass:
@@ -318,11 +289,40 @@ components:
       required:
       - biomass
       title: Wrapped
-    HTTPValidationError:
+    BiomassDailyModel:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
+        penId:
+          type: string
+        date:
+          type: string
+          format: date
+        sampleSize:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Number of samples used for avgWeight
+        avgWeight:
+          anyOf:
+          - type: number
+          - type: 'null'
+          description: Average weight in grams
+        kFactor:
+          anyOf:
+          - type: number
+          - type: 'null'
+        cv:
+          anyOf:
+          - type: number
+          - type: 'null'
+        weightDist:
+          $ref: '#/components/schemas/WeightDistModel'
       type: object
-      title: HTTPValidationError
+      required:
+      - penId
+      - date
+      - sampleSize
+      - avgWeight
+      - kFactor
+      - cv
+      - weightDist
+      title: BiomassDailyModel
